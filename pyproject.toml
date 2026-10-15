@@ -6,9 +6,9 @@ name = "overlap-audio"
 version = "0.1.0"
 description = "Source-disjoint multilabel audio classification with focal loss"
 requires-python = ">=3.10"
-dependencies = ["torch>=2.6,<3", "numpy>=2,<3", "scipy>=1.14,<2"]
+dependencies = ["torch>=2.6,<3", "numpy>=2,<3", "scipy>=1.14,<2", "soundfile>=0.12,<1"]
 [project.optional-dependencies]
-dev = ["pytest>=8,<10"]
+dev = ["pytest>=8,<10", "scikit-learn>=1.5,<2"]
 [project.scripts]
 overlap-audio = "overlap_audio.cli:main"
 [tool.setuptools.packages.find]

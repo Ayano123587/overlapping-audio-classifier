@@ -16,12 +16,17 @@ def thresholds_from_validation(targets, probabilities):
 def average_precision(target, scores):
     positives=float(target.sum())
     if not positives: return None
-    # Group tied scores, using precision after every complete tied threshold.
-    total=correct=0.;ap=0.
-    for score in torch.unique(scores,sorted=True).flip(0):
-        selected=scores==score;n=float(selected.sum());hits=float(target[selected].sum())
-        total+=n;correct+=hits;ap+=(hits/positives)*(correct/total)
-    return min(1.,max(0.,ap))
+    # Sort once and evaluate only complete tied thresholds (O(n log n)).
+    order=torch.argsort(scores,descending=True,stable=True)
+    ordered_scores=scores[order]
+    cumulative=target[order].cumsum(0)
+    ends=torch.ones(len(scores),dtype=torch.bool,device=scores.device)
+    ends[:-1]=ordered_scores[:-1]!=ordered_scores[1:]
+    indices=torch.arange(1,len(scores)+1,device=scores.device)[ends]
+    correct=cumulative[ends]
+    increments=torch.diff(correct,prepend=torch.zeros(1,device=correct.device))
+    ap=((increments/positives)*(correct/indices)).sum()
+    return min(1.,max(0.,float(ap)))
 
 def evaluate(targets, probabilities, thresholds):
     predictions=(probabilities>=thresholds).float()
