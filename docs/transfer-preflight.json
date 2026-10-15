@@ -1,0 +1,142 @@
+{
+  "source_revision": "96d4f72be4aba5c585c44ebd49a056b2d57f9b31",
+  "source_bundle_sha256": "2da22942063273dcf46fa1be9920c9f4eeebfd86cdc0ca6172b96b5209bad4ca",
+  "tests": {
+    "command": "python -m pytest -q",
+    "exit": 0,
+    "passed": 24,
+    "seconds": 31.92
+  },
+  "packaging": {
+    "command": "python -m pip wheel . --no-deps -w data/interim/package-smoke",
+    "exit": 0,
+    "encoder_modules_and_upstream_license_present": true
+  },
+  "run": "aikyatansinha/portfolio-maestro-panns-transfer-v2",
+  "private": true,
+  "holdout": "Previously observed existing holdout; not untouched",
+  "status": "COMPLETE: final policy locked from validation before inspecting observed transfer holdouts; no further tuning or live audio jobs",
+  "failure_v1": {
+    "type": "RuntimeError",
+    "error": "Inference tensors cannot be saved for backward. Please do not use Tensors created in inference mode in computation tracked by autograd. To work around this, you can make a clone to get a normal tensor and use it in autograd, or use `torch.no_grad()` instead of `torch.inference_mode()`.",
+    "elapsed_seconds": 133.38847160339355,
+    "traceback": "Traceback (most recent call last):\n  File \"/kaggle/src/script.py\", line 23, in <module>\n    head=Head(2).cuda();loss=masked_loss(head(embedding),torch.tensor([[.8,.2]],device='cuda'),torch.tensor([[1.,0.]],device='cuda'),torch.ones(2,device='cuda'))\n                                         ~~~~^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py\", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/kaggle/temp/audio-transfer-v2/source/src/overlap_audio/transfer.py\", line 164, in forward\n    return self.layers(x)\n           ~~~~~~~~~~~^^^\n  File \"/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py\", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/usr/local/lib/python3.13/dist-packages/torch/nn/modules/linear.py\", line 134, in forward\n    return F.linear(input, self.weight, self.bias)\n           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Inference tensors cannot be saved for backward. Please do not use Tensors created in inference mode in computation tracked by autograd. To work around this, you can make a clone to get a normal tensor and use it in autograd, or use `torch.no_grad()` instead of `torch.inference_mode()`.\n"
+  },
+  "repair": "Runner smoke clones inference-mode embeddings before head backward; no source/config/data/selection changes.",
+  "cumulative_budget_seconds": 2700,
+  "retry_budget_seconds": 2520,
+  "local_pretrained_smoke": "Stopped before model allocation to avoid concurrent memory pressure; partial download ignored",
+  "five_second_completion": {
+    "exit": 0,
+    "elapsed_seconds": 974.8551027774811,
+    "source_revision": "96d4f72be4aba5c585c44ebd49a056b2d57f9b31",
+    "source_bundle_sha256": "2da22942063273dcf46fa1be9920c9f4eeebfd86cdc0ca6172b96b5209bad4ca"
+  },
+  "five_second_pretrained_smoke": {
+    "actual_encoder_shape": [
+      1,
+      2048
+    ],
+    "finite": true,
+    "loss": 0.7058636546134949,
+    "elapsed_seconds": 120.79047679901123
+  },
+  "five_second_actual_inference": {
+    "command": [
+      "/usr/bin/python3",
+      "-m",
+      "overlap_audio.transfer",
+      "predict",
+      "--checkpoint",
+      "/kaggle/working/transfer-v2/selected.pt",
+      "--weights",
+      "/kaggle/working/private-encoder/Cnn14.pth",
+      "--audio",
+      "/kaggle/temp/audio-transfer-v2/real-probe.wav",
+      "--output",
+      "/kaggle/temp/audio-transfer-v2/probe-predictions.json",
+      "--device",
+      "cuda"
+    ],
+    "source_record": "metro_station_01",
+    "seconds": 5,
+    "rows": 5,
+    "probabilities": 85,
+    "finite_in_unit_interval": true,
+    "accuracy_claim": false,
+    "checkpoint_replay_max_difference": 0.0
+  },
+  "context_followup": {
+    "source_revision": "102a607c63b9926b551a8907328d26e54a6bf554",
+    "source_bundle_sha256": "8150ec47b77950330602e766890f52d22fb8981eb3591599a3d82d22bf7bd26b",
+    "runner_sha256": "2cec66fe43b1eac8f087cba7e0d54c27145e39d109c830c29b2ca2eb536d18d7",
+    "private": true,
+    "remaining_budget_seconds": 1561,
+    "prior_success_seconds": 974.8551027774811,
+    "prior_failed_seconds": 133.38847160339355,
+    "protocol": "central one-second vs five-second validation-only selection; observed test",
+    "selection_before_holdout_read": true,
+    "actual_kaggle_id": "aikyatansinha/portfolio-maestro-panns-central-second-v3",
+    "slug_note": "Kaggle derived new slug from title; recorded returned canonical URL. No resubmission."
+  },
+  "additional_tests": [
+    {
+      "command": "python -m pytest -q",
+      "passed": 24,
+      "seconds": 52.31,
+      "scope": "Context helper added; before private-candidate persistence change"
+    },
+    {
+      "command": "python -m pytest tests/test_transfer.py -q",
+      "passed": 4,
+      "seconds": 27.07,
+      "scope": "Final context/snapshot/saved-head inference changes; original-fixture only"
+    }
+  ],
+  "final_policy_commit": "bc17133",
+  "final_tests": {
+    "command": "python -m pytest -q",
+    "exit": 0,
+    "passed": 24,
+    "seconds": 23.42
+  },
+  "total_measured_processing_seconds": 1773.115810394287,
+  "learning_rate_followup": {
+    "kaggle_id": "aikyatansinha/portfolio-maestro-panns-head-lr-v4",
+    "version": 1,
+    "private": true,
+    "status": "COMPLETE",
+    "completion": {
+      "exit": 0,
+      "elapsed_seconds": 54.123741149902344,
+      "source_revision": "7fe283abc7a9c21c4fd65cdfe4bf968ae31470bf",
+      "source_bundle_sha256": "51369e2d0eff3317a7f6f4ca21409dd548a94ea463fdd73a112f6d234bf3ac47"
+    },
+    "environment": {
+      "python": "3.13.15",
+      "torch": "2.11.0+cu128",
+      "numpy": "2.1.3",
+      "scipy": "1.16.3",
+      "cuda": "12.8",
+      "gpu": "Tesla T4",
+      "source_revision": "7fe283abc7a9c21c4fd65cdfe4bf968ae31470bf",
+      "source_bundle_sha256": "51369e2d0eff3317a7f6f4ca21409dd548a94ea463fdd73a112f6d234bf3ac47",
+      "remaining_budget_seconds": 951,
+      "parent_embedding_metadata_sha256": "b00af25de14c6427c081f0823322677f3e73075aa1217ef16bf4839efc00efaa"
+    },
+    "build_receipt": {
+      "source_revision": "7fe283abc7a9c21c4fd65cdfe4bf968ae31470bf",
+      "source_bundle_sha256": "51369e2d0eff3317a7f6f4ca21409dd548a94ea463fdd73a112f6d234bf3ac47",
+      "runner_sha256": "4508bbcedbcfa04e5fe427a6942b0dc3fa96e7b9fb8590054986bec69e48f910",
+      "private": true,
+      "remaining_budget_seconds": 951,
+      "prior_failure_seconds": 133.38847160339355,
+      "prior_five_second_seconds": 974.8551027774811,
+      "prior_central_second_seconds": 610.7484948635101,
+      "learning_rate_scale": 0.3333333333333333,
+      "test_reports_unopened_at_launch": true,
+      "cache_only_training": true,
+      "no_repeat_full_audio_download_or_embedding_extraction": true
+    }
+  }
+}

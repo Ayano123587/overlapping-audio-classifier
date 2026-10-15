@@ -1,12 +1,35 @@
 # Overlapping Audio Classifier
 
-Classify naturally overlapping environmental sounds with a trained PyTorch CNN and time-aligned human soft labels. The **MAESTRO Real v1 experiment completed** on a private Kaggle T4 run: three validation-selected candidates, 49 real recordings, and a recording-disjoint 29/10/10 split.
+Classify naturally overlapping environmental sounds with a frozen AudioSet-pretrained PANNs encoder and a trained multilabel head. Three validation-selected head studies completed on real MAESTRO Real v1 audio, with a fixed recording-disjoint 29/10/10 split.
 
-At validation-selected thresholds, the selected width-32 soft BCE model achieved **F1 0.26878 across all 17 observed classes**, **supported-class F1 0.35149**, **supported-class AP 0.37617**, and **micro F1 0.46714**. The always-present baseline achieved all-observed F1 0.20848, supported F1 0.27262 and AP 0.18639. Four classes have no positive test labels; supported averages cover only 13 classes. Rare classes remain weak. These are custom holdout results, **not official DCASE leaderboard scores**.
+The selected five-second transfer model achieved **AP 0.39538 across 13 supported classes**, **F1 0.29482 across all 17 observed classes**, and **micro F1 0.46061**. The earlier scratch CNN scored AP 0.37617, all-observed F1 0.26878 and micro F1 0.46714. Improvement is modest and mixed: micro F1 and several classes regress, and rare events remain weak. The holdout was previously observed; these are descriptive custom-split results, not untouched-test or official DCASE scores.
 
-See the [executed natural-audio evaluation](docs/maestro-evaluation.md), [aggregate report and reproducibility hashes](docs/maestro-results.json), [prespecified improvement protocol](docs/improvement-protocol.md), and [independent source audit](docs/independent-audit.md). The successful cloud run took 1,075.26 seconds. Its archived source and later production guards are distinguished explicitly.
+The final model was locked by validation AP before opening any transfer holdout report. Shorter one-second context and one-third learning rates failed to improve the five-second validation winner. All three studies, the failed smoke, exact source/checkpoint hashes and actual inference checks are documented in the [executed transfer evaluation](docs/transfer-evaluation.md) and [aggregate evidence](docs/transfer-results.json). See the [original scratch evaluation](docs/maestro-evaluation.md) and [independent pipeline audit](docs/independent-audit.md) for baseline history.
 
-## Natural-audio workflow
+## Pretrained encoder workflow
+
+A frozen PANNs Cnn14 AudioSet encoder and validation-selected masked soft-label heads
+are implemented in `overlap_audio.transfer`. The follow-up uses the **already-observed**
+recording holdout; it cannot restore untouched evaluation. The frozen hypothesis,
+three head candidates, licensing, exact encoder identity and 45-minute private GPU
+budget are in [transfer-protocol.md](docs/transfer-protocol.md).
+
+```bash
+python -m pip install -e ".[dev,transfer]"
+python -m overlap_audio.transfer prepare --root data/external/maestro --output data/processed/transfer-v2 --weights data/external/panns/Cnn14.pth --device cuda --context-seconds 5
+python -m overlap_audio.transfer train --cache data/processed/transfer-v2 --output models/transfer-v2 --epochs 80 --device cuda
+python -m overlap_audio.transfer predict --checkpoint models/transfer-v2/selected.pt --weights data/external/panns/Cnn14.pth --audio your-recording.wav --output data/processed/transfer-prediction.json
+```
+
+Preparation downloads the original encoder weights if absent and checks the
+publisher checksum. The trained checkpoint requires that exact encoder SHA256,
+training-only feature scaling and validation thresholds. Use fresh cache and run
+directories: reports cannot be overwritten by repeated holdout evaluation. Retain the [full MAESTRO license](docs/MAESTRO-LICENSE.txt) with private artifacts.
+No audio, derived embeddings or weights are redistributed. Native PANNs preprocessing uses
+32 kHz audio and five-second offline context, so this remains unsuitable for
+streaming or exact event-boundary localization.
+
+## Scratch CNN reproduction
 
 Use a fresh virtual environment for this repository. On Windows PowerShell:
 
