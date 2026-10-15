@@ -1,0 +1,293 @@
+{
+  "kind": "ESC-10 real-audio subset; synthetic mixtures",
+  "classes": [
+    "dog",
+    "rain",
+    "crying_baby",
+    "clock_tick"
+  ],
+  "revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+  "records": [
+    {
+      "label": 0,
+      "source": "100032",
+      "split": "train",
+      "sha256": "f40a849a2375c8c63312a73dd2dd6c74007301fcc21b4be2ece29a642831e3d8",
+      "filename": "1-100032-A-0.wav"
+    },
+    {
+      "label": 0,
+      "source": "110389",
+      "split": "train",
+      "sha256": "4a18f3f834eb184b9f02595ac74c7de37ef8048a3da92f58f27018fec580b36a",
+      "filename": "1-110389-A-0.wav"
+    },
+    {
+      "label": 1,
+      "source": "17367",
+      "split": "train",
+      "sha256": "d732acd2e0c7c40405968010f49f250740c86998fc416eff2ed5330fc8c89dea",
+      "filename": "1-17367-A-10.wav"
+    },
+    {
+      "label": 2,
+      "source": "187207",
+      "split": "train",
+      "sha256": "ddf5bf45f73bc73d1838bf0cb6af530584f324aef513112ee15c210e83ecbd6b",
+      "filename": "1-187207-A-20.wav"
+    },
+    {
+      "label": 2,
+      "source": "211527",
+      "split": "train",
+      "sha256": "3cbcd59a0db21f0ed8c252c74ea1bc193117d2c13ed99821885c46c564010b3e",
+      "filename": "1-211527-A-20.wav"
+    },
+    {
+      "label": 1,
+      "source": "21189",
+      "split": "train",
+      "sha256": "5f15ab2d8f6ef9932909b1b75c8ac254cbea46c93b4b2f0f3542abdf09b9abc0",
+      "filename": "1-21189-A-10.wav"
+    },
+    {
+      "label": 3,
+      "source": "21934",
+      "split": "train",
+      "sha256": "8d26e40e0e382b0d2d7f6dafcb132cfe703ee3f7f32780e878fdb5a1aaffcc28",
+      "filename": "1-21934-A-38.wav"
+    },
+    {
+      "label": 3,
+      "source": "21935",
+      "split": "train",
+      "sha256": "4d7ad80cf2733e2d9260061afbbdb0bd3d64cfcbc3df5c8a0258639716a7329d",
+      "filename": "1-21935-A-38.wav"
+    },
+    {
+      "label": 1,
+      "source": "101676",
+      "split": "train",
+      "sha256": "ef456a67e12d2e2c84513e9eb8bea769e343cd5e0bfe65a34dc96c526f260838",
+      "filename": "2-101676-A-10.wav"
+    },
+    {
+      "label": 2,
+      "source": "107351",
+      "split": "train",
+      "sha256": "f89a24c9494eab238d80013b9409e6da4058b8097c665a789e48de1aef1bcef5",
+      "filename": "2-107351-A-20.wav"
+    },
+    {
+      "label": 2,
+      "source": "107351",
+      "split": "train",
+      "sha256": "ebb3365010813cec4b951d1294d3376fc598116a1f86115a3e279ea013160a6a",
+      "filename": "2-107351-B-20.wav"
+    },
+    {
+      "label": 0,
+      "source": "114280",
+      "split": "train",
+      "sha256": "23cd06e6c8b2e054d13ad6392d34d91588cd8572041d6f4c1c337048fd5deb69",
+      "filename": "2-114280-A-0.wav"
+    },
+    {
+      "label": 0,
+      "source": "114587",
+      "split": "train",
+      "sha256": "34d7f9c32c2cda9b6b68483028bb85326259d1c5f2956eac2ecc48b18b06f999",
+      "filename": "2-114587-A-0.wav"
+    },
+    {
+      "label": 1,
+      "source": "117625",
+      "split": "train",
+      "sha256": "26c3b6b455aeb91f6f3d9a2b00f7e06bd1fc79609606ea2ae86272657dc02e88",
+      "filename": "2-117625-A-10.wav"
+    },
+    {
+      "label": 3,
+      "source": "119748",
+      "split": "train",
+      "sha256": "7bb645903e539845643c4162d619f51b3648307fbe1966b19d15f01ceb8ecde5",
+      "filename": "2-119748-A-38.wav"
+    },
+    {
+      "label": 3,
+      "source": "127108",
+      "split": "train",
+      "sha256": "23f4cb882b12e8da2ab06a9b8f2f58affb715007b1846d6a041b0717aeb04ec0",
+      "filename": "2-127108-A-38.wav"
+    },
+    {
+      "label": 1,
+      "source": "132852",
+      "split": "train",
+      "sha256": "5d4960883ceabe28c008721ea3b5f5206a6f0234cacd4c1af81dd7594b4d3503",
+      "filename": "3-132852-A-10.wav"
+    },
+    {
+      "label": 0,
+      "source": "136288",
+      "split": "train",
+      "sha256": "8293b4fe3c40cf9bbe243fa27d153bbef86217f855e4295e89f41411267c9f8d",
+      "filename": "3-136288-A-0.wav"
+    },
+    {
+      "label": 1,
+      "source": "140774",
+      "split": "train",
+      "sha256": "1dd994fb071b52e4232b0cbd06558dd8d179008be2e4cf1f41d4abdca4f390fe",
+      "filename": "3-140774-A-10.wav"
+    },
+    {
+      "label": 3,
+      "source": "142593",
+      "split": "train",
+      "sha256": "8eb0915dab65e09fd489c3ccac93e620892cb795abe4b16e7a103c5bbc92446b",
+      "filename": "3-142593-A-38.wav"
+    },
+    {
+      "label": 3,
+      "source": "143933",
+      "split": "train",
+      "sha256": "02809701aa82027a54a463637255b4e26ef3ccd1a47d69b59289e185b28ed675",
+      "filename": "3-143933-A-38.wav"
+    },
+    {
+      "label": 0,
+      "source": "144028",
+      "split": "train",
+      "sha256": "2828c40f81b8bdfded734b1ea057444f780d1ada4241a2dc2ab70c646f963b47",
+      "filename": "3-144028-A-0.wav"
+    },
+    {
+      "label": 2,
+      "source": "151080",
+      "split": "train",
+      "sha256": "e673e80074c99c9a8426ff708ca40d5f7a146605cf7b1625532276a7b95fd801",
+      "filename": "3-151080-A-20.wav"
+    },
+    {
+      "label": 2,
+      "source": "151081",
+      "split": "train",
+      "sha256": "48a0009a2b2f7e97d19c020c1292e17ee0775dc7537bca3109c4128fb17ac7de",
+      "filename": "3-151081-A-20.wav"
+    },
+    {
+      "label": 1,
+      "source": "160999",
+      "split": "validation",
+      "sha256": "c85ef3d5cbd86ba80a7f089277d66f165e36b8dcf8070643ddc7ec73eb4f5dcb",
+      "filename": "4-160999-A-10.wav"
+    },
+    {
+      "label": 1,
+      "source": "161127",
+      "split": "validation",
+      "sha256": "3ea9076dd2ee68b67bd0707652a0c0ca77811b0664426e10e6860c187401af89",
+      "filename": "4-161127-A-10.wav"
+    },
+    {
+      "label": 2,
+      "source": "167077",
+      "split": "validation",
+      "sha256": "43a894a23a4a1bed053e2ca040f7029a5d9029269173d8bac1c650c52c03e937",
+      "filename": "4-167077-A-20.wav"
+    },
+    {
+      "label": 2,
+      "source": "167077",
+      "split": "validation",
+      "sha256": "0dd0122251e1b989c8309596e92ea95d06989db8b37d28fee3c485842f9f0014",
+      "filename": "4-167077-B-20.wav"
+    },
+    {
+      "label": 3,
+      "source": "175945",
+      "split": "validation",
+      "sha256": "e21894f4cd41eeb1423fe7d6eadda4dfd32cbd686c639bbadbf3ab3bbb90bc28",
+      "filename": "4-175945-A-38.wav"
+    },
+    {
+      "label": 3,
+      "source": "179984",
+      "split": "validation",
+      "sha256": "c39eef951ebd527500e4c8bae4e7d5c6638017dc093125f0d46d462573a8fea5",
+      "filename": "4-179984-A-38.wav"
+    },
+    {
+      "label": 0,
+      "source": "182395",
+      "split": "validation",
+      "sha256": "c249bcb8ef81d12516ad17c8a77f88c01952cdf70b9413732af5fb8b803f9c7d",
+      "filename": "4-182395-A-0.wav"
+    },
+    {
+      "label": 0,
+      "source": "183992",
+      "split": "validation",
+      "sha256": "96bf2e0efce166f347db6ae02b3c17d24acadffc45d67ad6015de7b1162f54dc",
+      "filename": "4-183992-A-0.wav"
+    },
+    {
+      "label": 2,
+      "source": "151085",
+      "split": "test",
+      "sha256": "e46d87b3673136a4d97b42f0ac6411ed299075bb2c88d61f7c456c0afe6804db",
+      "filename": "5-151085-A-20.wav"
+    },
+    {
+      "label": 1,
+      "source": "181766",
+      "split": "test",
+      "sha256": "608fcc0bef32512e2a984c7d3d2cac8ea161f6337ec0056850a6d34f07f8db35",
+      "filename": "5-181766-A-10.wav"
+    },
+    {
+      "label": 1,
+      "source": "188655",
+      "split": "test",
+      "sha256": "9ed876436c72f36c230c275744818829912a2299bcbd8ccca6eccce9df6f8a57",
+      "filename": "5-188655-A-10.wav"
+    },
+    {
+      "label": 2,
+      "source": "198411",
+      "split": "test",
+      "sha256": "efa9989fa053f1bcb7916965791c7bf55c05e4e5acf0bd6d61c649d833659494",
+      "filename": "5-198411-A-20.wav"
+    },
+    {
+      "label": 3,
+      "source": "201194",
+      "split": "test",
+      "sha256": "61599b9d388e887b0318d4b008ca3f545b28f327ba3ecb12afdff7a128162c28",
+      "filename": "5-201194-A-38.wav"
+    },
+    {
+      "label": 0,
+      "source": "203128",
+      "split": "test",
+      "sha256": "435e476d5d429aa1cc51c23c9b5e5f8f472faf022846996ade18a457621d0552",
+      "filename": "5-203128-A-0.wav"
+    },
+    {
+      "label": 0,
+      "source": "203128",
+      "split": "test",
+      "sha256": "2a253659c2c3c86a0fbaf1e928d8a30933e90c7e7d4be43a3e4b4217e5be0c26",
+      "filename": "5-203128-B-0.wav"
+    },
+    {
+      "label": 3,
+      "source": "208624",
+      "split": "test",
+      "sha256": "536288f95505f82775b97445bfb95839520ebd4e11fb28d4be175f99adcd5060",
+      "filename": "5-208624-A-38.wav"
+    }
+  ],
+  "license": "ESC-10 CC BY; retain upstream individual attributions in downloaded LICENSE"
+}

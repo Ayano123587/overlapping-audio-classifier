@@ -1,0 +1,18 @@
+{
+  "dog": {
+    "probability": 0.3654412627220154,
+    "present": true
+  },
+  "rain": {
+    "probability": 0.1350385546684265,
+    "present": false
+  },
+  "crying_baby": {
+    "probability": 0.8605148196220398,
+    "present": true
+  },
+  "clock_tick": {
+    "probability": 0.2452550083398819,
+    "present": false
+  }
+}

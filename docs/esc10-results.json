@@ -1,0 +1,103 @@
+{
+  "dataset": "ESC-10 real-audio subset; synthetic mixtures",
+  "classes": [
+    "dog",
+    "rain",
+    "crying_baby",
+    "clock_tick"
+  ],
+  "seed": 42,
+  "epochs": 15,
+  "training_mixtures": 512,
+  "training_positive_support": [
+    388,
+    196,
+    91,
+    9
+  ],
+  "training_positive_ratio": 43.11111068725586,
+  "loss": [
+    0.05944879353046417,
+    0.046084011904895306,
+    0.039922147523611784,
+    0.038429008796811104,
+    0.03527771192602813,
+    0.036514050560072064,
+    0.03462963236961514,
+    0.030514071928337216,
+    0.029157459968701005,
+    0.028402756433933973,
+    0.027123153675347567,
+    0.025991286849603057,
+    0.024046231294050813,
+    0.02328663971275091,
+    0.020863106241449714
+  ],
+  "thresholds_selected_on_validation": [
+    0.10000000149011612,
+    0.3999999761581421,
+    0.19999998807907104,
+    0.44999995827674866
+  ],
+  "test": {
+    "macro_f1": 0.4901198148727417,
+    "micro_f1": 0.6509433962264151,
+    "per_class_f1": [
+      0.8820960521697998,
+      0.7376425862312317,
+      0.34074074029922485,
+      0.0
+    ],
+    "per_class_average_precision": [
+      0.6985005642499931,
+      0.9927469631443938,
+      0.8658877052210793,
+      0.017447581002390872
+    ],
+    "macro_average_precision": 0.6436457034044643,
+    "positive_support": [
+      202,
+      97,
+      46,
+      6
+    ],
+    "samples": 256
+  },
+  "baseline_always_present": {
+    "macro_f1": 0.4455271065235138,
+    "micro_f1": 0.5105454545454545,
+    "per_class_f1": [
+      0.8820960521697998,
+      0.5495750904083252,
+      0.30463576316833496,
+      0.04580152779817581
+    ],
+    "per_class_average_precision": [
+      0.7890625,
+      0.37890625,
+      0.1796875,
+      0.0234375
+    ],
+    "macro_average_precision": 0.3427734375,
+    "positive_support": [
+      202,
+      97,
+      46,
+      6
+    ],
+    "samples": 256
+  },
+  "source_counts": {
+    "train": 23,
+    "validation": 7,
+    "test": 7
+  },
+  "source_disjoint": true,
+  "limitations": [
+    "Mixture labels are synthetic presence labels, not natural recording annotations.",
+    "This is clip classification, not waveform source separation or event localization.",
+    "Small center-cropped subset metrics cannot establish generalization to field recordings.",
+    "Rare mixture rate 0.03 is an imbalance smoke exercise, not evidence at 1:1000 prevalence."
+  ],
+  "rare_class_inclusion_probability": 0.03
+}
