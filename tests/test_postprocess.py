@@ -77,3 +77,18 @@ def test_selected_checkpoint_waveform_replay_with_fixture_encoder(tmp_path,monke
     for row in result['observations']:assert list(row['probabilities'].values())==pytest.approx([.5,.5],abs=1e-6)
     weights.write_bytes(b'changed')
     with pytest.raises(ValueError,match='identity'):infer(checkpoint,weights,audio,tmp_path/'bad.json')
+
+
+def test_inference_rejects_existing_and_input_alias_before_loading(tmp_path,monkeypatch):
+    from overlap_audio import postprocess as module
+    def forbidden(*args,**kwargs):raise AssertionError('Must reject before checkpoint/encoder allocation')
+    monkeypatch.setattr(module.torch,'load',forbidden)
+    monkeypatch.setattr(module,'encoder',forbidden)
+    paths=[tmp_path/name for name in ('checkpoint.pt','encoder.pt','audio.wav')]
+    for path in paths:path.write_bytes(b'original')
+    for output in paths:
+        with pytest.raises(ValueError,match='aliases'):module.infer(*paths,output)
+        assert output.read_bytes()==b'original'
+    report=tmp_path/'report.json';report.write_text('preserved',encoding='utf-8')
+    with pytest.raises(ValueError,match='exists'):module.infer(*paths,report)
+    assert report.read_text()=='preserved'

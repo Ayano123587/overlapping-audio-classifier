@@ -1,0 +1,24 @@
+{
+  "dataset": "MAESTRO Real v1",
+  "official_source": "https://zenodo.org/records/7244360",
+  "official_recordings": 49,
+  "used_recordings": 49,
+  "missing_recordings": [],
+  "extra_recordings": [],
+  "excluded_recordings": [],
+  "annotation_archive_md5": "e6a3f84f8020725d559b38ccb494ef3d",
+  "annotation_archive_sha256": "dc94b76ce76d5e4d93f55a786ff5845dad3d78856a5be23c2976dbfa8984fc58",
+  "metadata_sha256": "a6abdeb3477991ffd46c6ef1d5496caf12898c15544663c7f199cea95037ced4",
+  "all49_annotation_hashes_match": true,
+  "all49_audio_sha256_receipts_present": true,
+  "split_recordings": {
+    "test": 10,
+    "validation": 10,
+    "train": 29
+  },
+  "cached_whole_second_rows": 11369,
+  "coverage_unit": "All49 recordings; 11,369 whole-second label rows. Sub-second tails are not complete one-second target windows.",
+  "scope": "Entire MAESTRO Real v1; not the much larger parent TUT Acoustic Scenes2016 corpus and not later MAESTRO releases.",
+  "evaluation": "Custom29/10/10recording split uses every source exactly once; training does not include validation/test recordings.",
+  "new_test_scoring": false
+}

@@ -1,0 +1,105 @@
+{
+  "data": {
+    "source": "https://zenodo.org/records/7244360",
+    "recordings": 49,
+    "split_recordings": {
+      "train": 29,
+      "validation": 10,
+      "test": 10
+    },
+    "split_seconds": {
+      "train": 6838,
+      "validation": 2163,
+      "test": 2368
+    },
+    "classes": 17,
+    "publisher_files": [
+      {
+        "name": "development_annotation.zip",
+        "md5": "e6a3f84f8020725d559b38ccb494ef3d",
+        "bytes": 877169,
+        "url": "https://zenodo.org/records/7244360/files/development_annotation.zip?download=1"
+      },
+      {
+        "name": "development_audio.zip",
+        "md5": "3de7cb4f92a115a6f5cc077a41ca07b3",
+        "bytes": 2614126654,
+        "url": "https://zenodo.org/records/7244360/files/development_audio.zip?download=1"
+      },
+      {
+        "name": "LICENSE.txt",
+        "md5": "d1111f68bf579834e148db1788ae4cf9",
+        "bytes": 1560,
+        "url": "https://zenodo.org/records/7244360/files/LICENSE.txt?download=1"
+      },
+      {
+        "name": "README.md",
+        "md5": "a8f77695c5933dcfcaea5018bc43c154",
+        "bytes": 4865,
+        "url": "https://zenodo.org/records/7244360/files/README.md?download=1"
+      }
+    ]
+  },
+  "encoder": {
+    "source": "https://zenodo.org/records/3987831",
+    "native_sample_rate": 32000,
+    "sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31"
+  },
+  "feature_metadata_sha256": "a6abdeb3477991ffd46c6ef1d5496caf12898c15544663c7f199cea95037ced4",
+  "selected_checkpoint": {
+    "path": "models/postprocess-v5/selected.pt",
+    "sha256": "d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689",
+    "validation_ap": 0.4767020190677916,
+    "saved_head_replay_max_difference": 0.0
+  },
+  "selection_protocol": {
+    "original_commit": "b4da9eb",
+    "sha256": "1ab32b43e5cdbb1d530d8975bc3d0c59f5c9ce8f08b9e3b1f9923ae3de4b0136"
+  },
+  "source_run": {
+    "kernel": "aikyatansinha/portfolio-maestro-audio-postprocess-v5",
+    "version": 1,
+    "source_commit": "b16abf1",
+    "source_bundle_sha256": "28f466a5bc307d524b3085778063de3190aabfc96cacfb1c2b1a9f96c288deba"
+  },
+  "test_exposure": "Test results are previously observed. Development selection was repeated; the overall process was not fully blinded.",
+  "limits": [
+    "Custom recording split, not official DCASE five-fold benchmark.",
+    "Future lookahead3seconds; offline/delayed use.",
+    "Missing/rare supervision and per-class regressions remain.",
+    "CPU/GPU and ensemble-size changes confound seed comparisons.",
+    "No significance, optimality or new-location generalization claim."
+  ],
+  "selected_recipe_reproduction": {
+    "source_commit": "dfbaed6bfb889ad19f0dbeeb6d22a87489673588",
+    "kernel": "aikyatansinha/portfolio-maestro-selected-recipe-reproduction-v1",
+    "version": 1,
+    "status": "COMPLETE",
+    "rows": {
+      "train": 6838,
+      "validation": 2163
+    },
+    "test_labels_loaded": false,
+    "input_hashes": {
+      "train": "76f8204ee6bee39189b2d6e858ddb6e56541d33e0c6011560462e64cc9c5b55b",
+      "validation": "37c35c390f040db3fd3b81160aefde66647fd94413a11c5169053157dcd1d57d"
+    },
+    "checkpoint_sha256": "57dc020f58af8756b05593dd7f03d305d16942fc1ce07cc20fa69f458e7955b3",
+    "checkpoint_probability_max_difference": 0.0,
+    "epochs_completed": 20,
+    "best_epoch": 1,
+    "unsmoothed_validation_ap": 0.4672076267306693,
+    "fixed_box3_validation_ap": 0.4695476455187115,
+    "runtime_seconds": 22.618157863616943,
+    "environment": {
+      "torch": "2.11.0+cpu",
+      "device": "cpu",
+      "threads": 2
+    },
+    "retained_environment": {
+      "torch": "2.11.0+cu128",
+      "device": "Tesla T4 CUDA12.8"
+    },
+    "interpretation": "Same source recipe and exact feature archives, not identical training numerics across CPU/CUDA. Dropout RNG engines and matrix kernels differ; their individual contributions were not isolated. Retained validation-best deployment model remains unchanged."
+  }
+}

@@ -229,6 +229,10 @@ def select_combination(central_probabilities,five_probability,y,m,ids,seconds,st
 
 
 def infer(checkpoint,weights,audio,output,device='cpu'):
+    output=Path(output)
+    if output.resolve() in {Path(p).resolve() for p in (checkpoint,weights,audio)}:
+        raise ValueError('Prediction output aliases an input')
+    if output.exists():raise ValueError('Prediction output exists; choose a fresh path')
     bundle=torch.load(checkpoint,map_location='cpu',weights_only=True)
     validate_bundle(bundle)
     if file_hash(weights)!=bundle['encoder_weight_sha256']:raise ValueError('Encoder identity mismatch')
@@ -258,7 +262,10 @@ def infer(checkpoint,weights,audio,output,device='cpu'):
             'observations':[{'onset':second,'offset':min(second+1,len(wave)/RATE),
                              'probabilities':dict(zip(classes,row.tolist())),
                              'present':[c for c,v,t in zip(classes,row,thresholds) if v>=t]} for second,row in enumerate(probability)]}
-    write_json(output,result);return result
+    output.parent.mkdir(parents=True,exist_ok=True)
+    with output.open('x',encoding='utf-8',newline='\n') as stream:
+        json.dump(result,stream,indent=2,allow_nan=False);stream.write('\n')
+    return result
 
 
 def main():

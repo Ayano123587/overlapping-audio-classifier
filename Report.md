@@ -1,32 +1,27 @@
-# Audio experiment report
+# Environmental sound classification
 
-The selected five-second PANNs head plus box3 reached observed-test AP **0.40298**, compared with **0.39538** before smoothing. Micro F1 increased from **0.46061** to **0.47153**. All-17-class macro F1 is **0.30153**; supported-class macro F1 is **0.39431**.
+The selected five-second PANNs head with recording-safe box3 smoothing achieves **0.47670 validation AP** and **0.40298 observed-test AP**. The unsmoothed head scores 0.47009 and 0.39538. Test micro F1 is **0.47153**, all-17-class macro F1 **0.30153**, and supported-class macro F1 **0.39431**.
 
-## Recipe
+## Data and model
 
-MAESTRO Real v1: [Zenodo 7244360](https://zenodo.org/records/7244360), 49 recordings, 17 classes, 6,838/2,163/2,368 train/validation/test seconds. Recordings are split before feature extraction. Unknown scene classes are masked; soft scores train the head and strict >0.5 labels evaluate it.
+The run uses every recording in [MAESTRO Real v1](https://zenodo.org/records/7244360): 49 recordings and 17 classes. The recording split gives 6,838 training, 2,163 validation and 2,368 test whole seconds. The [coverage audit](docs/dataset-coverage.json) checks all annotation IDs and hashes. Unknown scene classes are masked; soft annotation scores train the head and strict >0.5 labels evaluate it.
 
-Frozen [PANNs Cnn14 weights](https://zenodo.org/records/3987831) use native 32 kHz and five-second windows. Encoder SHA256: 0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31. The selected MLP has 256 hidden units, dropout 0.3, train-only scaling/prevalence weights, masked soft BCE, AdamW LR 0.0003 and validation checkpoint selection. Thresholds use validation F1. Box3 never crosses recordings or missing seconds.
+Frozen [PANNs Cnn14 weights](https://zenodo.org/records/3987831) produce native 32 kHz, five-second features. A trained 256-unit MLP uses dropout 0.3, train-only scaling and prevalence weights, masked soft BCE, AdamW LR 0.0003 and validation checkpoint selection. Validation F1 sets class thresholds after fixed box3 filtering, which resets at recording boundaries and missing seconds. `train.py --recipe selected` reproduces the one-head seed-42 recipe with an 80-epoch ceiling, minimum 20 epochs and patience 12; the earliest maximum unsmoothed validation AP determines the checkpoint. It checks the complete pinned cohort, never loads test labels, and saves a reload-verified deployment bundle. A full-cohort CPU fit and exact saved-checkpoint replay verify this command; CPU/CUDA training need not reproduce identical weights or scores. The retained validation-best CUDA model supplies the reported results.
 
-| Comparison | Validation AP | Observed test AP |
-|---|---:|---:|
-| Scratch CNN | 0.41552 | 0.37617 |
-| Five-second transfer | 0.47009 | 0.39538 |
-| Central one-second | 0.41289 | 0.33693 |
-| Central lower LR | 0.41432 | 0.33684 |
-| Selected five-second + box3 | 0.47670 | 0.40298 |
-| Best filtered three-seed V6 candidate, rejected | 0.46659 | No separate release |
+| Model | Validation AP | Observed test AP | Test micro F1 |
+|---|---:|---:|---:|
+| Scratch spectrogram CNN | 0.41552 | 0.37617 | — |
+| Five-second transfer head | 0.47009 | 0.39538 | 0.46061 |
+| Selected head + box3 | **0.47670** | **0.40298** | **0.47153** |
 
-V6 trained twelve heads: four LR/dropout/decay configurations, each with seeds 42/1337/2026. No ensemble or fixed mixture beat the retained validation policy. GPU submission was rejected by the weekly service quota; the prospectively amended CPU study completed in 630.39 seconds. The initial transfer smoke failed on inference tensors entering autograd and produced no valid model score.
+## Working inference
 
-## Reproduction checks
+The retained checkpoint is `models/postprocess-v5/selected.pt`, SHA256 `d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689`. Real-waveform inference produced 85 finite probabilities for five seconds, with exact cached replay. The [reproducibility record](docs/reproducibility.json) pins encoder, feature metadata and selection sources.
 
-Retained checkpoint: models/postprocess-v5/selected.pt. SHA256: d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689. Real-waveform inference produced 85 finite probabilities over five seconds. Saved-head replay matched exactly. The main notebook repeats a fixed full-data control fit and checks its recorded state, then replays selected validation inference.
-
-Source checksums, input hashes, framework versions, original protocol snapshots and run identities are in the [ledger](docs/experiment-ledger.json). Detailed historical records remain in Git history.
+The [training notebook](notebooks/02_complete_natural_audio_workflow.ipynb) executes a fixed full-data control fit and reproduces its saved state; this control is distinct from the selected deployment head. The [deployment notebook](notebooks/04_deployment_and_threshold_diagnostics.ipynb) loads the selected artifact on all 2,163 validation seconds, shows masked classwise mistakes and verifies reload and recording-boundary behavior. Cached-head timing excludes audio loading and encoder computation.
 
 ## Limits
 
-This test was already observed. V5 selected its policy before its own test load; its aggregate was opened after V6 protocol/code freeze but before V6 selection finished. No V6 objective, grid, seed, stopping rule or promotion threshold changed. The overall process was not fully blinded.
+This is a custom 29/10/10 recording split, not the official DCASE five-fold benchmark. The test was previously observed and development selection was repeated. Inference requires three seconds of future context. Unknown location/session overlap and upstream pretrained exposure limit transfer claims.
 
-AP fell for children voices, coffee machine and shopping cart; F1 fell for children voices and large vehicles. Coffee/cart each have one positive test second, four classes have no positives, and several classes lack training supervision. CPU/GPU and ensemble-size changes complicate comparisons. The study establishes neither reliable rare-class detection, statistical significance, new-location transfer nor an optimum.
+Children voices, coffee machine and shopping cart lose AP relative to unsmoothed inference. Coffee/cart each have only one positive test second; four classes have no positives and several lack training supervision. The result does not establish reliable rare-class detection or statistical significance. Audio, embeddings and model weights are not redistributed; MAESTRO's custom experimental/noncommercial terms apply.

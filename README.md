@@ -1,6 +1,6 @@
 # Overlapping environmental sound classification
 
-A PyTorch multilabel classifier for naturally overlapping MAESTRO recordings. A frozen PANNs Cnn14 encoder feeds a trained 17-class MLP. Training keeps unknown scene annotations masked; inference applies recording-safe temporal smoothing.
+A PyTorch multilabel classifier for naturally overlapping MAESTRO recordings. The run uses all 49 recordings in the official MAESTRO Real v1 release, with no recording subsample; the [coverage audit](docs/dataset-coverage.json) verifies archive IDs and annotation hashes. A frozen PANNs Cnn14 encoder feeds a trained 17-class MLP. Training keeps unknown scene annotations masked; inference applies recording-safe temporal smoothing.
 
 | Model | Validation AP | Observed test AP | Test micro F1 |
 |---|---:|---:|---:|
@@ -23,22 +23,23 @@ The notebooks retain executed tables and plots. They never rescore the observed 
 ~~~bash
 python -m pip install -e ".[dev,transfer,notebook]"
 python -m overlap_audio.fetch_maestro --audio
+python -m overlap_audio.selected_recipe weights --output data/external/panns/Cnn14.pth
 python -m overlap_audio.transfer prepare --root data/external/maestro --output data/features/five-second-cache --weights data/external/panns/Cnn14.pth --device cpu --context-seconds 5
-python train.py --cache data/features/five-second-cache --output models/my-fresh-run --config control --device cpu
+python train.py --cache data/features/five-second-cache --output models/my-fresh-run --recipe selected --device cpu
 python evaluation_scripts/evaluate.py --checkpoint models/my-fresh-run/selected.pt --cache-five data/features/five-second-cache --output data/reports/my-validation.json
 python -m pytest -q
 ~~~
 
-Feature extraction needs substantial RAM; use cloud compute on a limited-memory host. Root training fits a fresh three-seed configuration using train/validation only and rejects existing outputs. It does not reproduce the historical winner merely by using its name.
+Feature extraction needs substantial RAM; use cloud compute on a limited-memory host. Root training defaults to the fixed selected recipe: one seed-42, 256-unit head, train-only normalization and class weights, validation checkpoint stopping, fixed box3 smoothing, and validation-only thresholds. It requires the complete pinned 6,838/2,163-row training/validation cache and never opens test labels. Fresh fits reproduce the recipe, not necessarily bit-identical historical weights. Use `--recipe experiment --config control` for the separate three-seed control. The weight acquisition command verifies the published PANNs SHA256 before feature extraction.
 
-For the privately retained production artifact:
+Run the fresh selected checkpoint on a recording:
 
 ~~~bash
-python -m overlap_audio.postprocess predict --checkpoint models/postprocess-v5/selected.pt --weights data/external/panns/Cnn14.pth --audio data/my-recording.wav --output data/my-new-prediction.json
+python -m overlap_audio.postprocess predict --checkpoint models/my-fresh-run/selected.pt --weights data/external/panns/Cnn14.pth --audio data/my-recording.wav --output data/my-new-prediction.json
 ~~~
 
 ## Scope and sources
 
 This is a custom 29/10/10 recording split, not the official DCASE five-fold benchmark. Test results are already observed; repeated validation selection, scene bias and unknown location/session overlap limit generalization.
 
-[Report](Report.md) records the recipe and negative experiments. [Experiment ledger](docs/experiment-ledger.json) retains hashes, failed runs and test-exposure timing. MAESTRO has a [custom experimental/noncommercial license](docs/MAESTRO-LICENSE.txt). PANNs code is MIT; pretrained weights are CC-BY 4.0. The optional ESC-10 adapter retains [clip attribution](docs/ESC10-ATTRIBUTION.md). No audio, caches or model binaries are published.
+[Report](Report.md) gives the training recipe and selected results. [Reproducibility record](docs/reproducibility.json) pins the sources, selection protocol and retained checkpoint. MAESTRO has a [custom experimental/noncommercial license](docs/MAESTRO-LICENSE.txt). PANNs code is MIT; pretrained weights are CC-BY 4.0. The optional ESC-10 adapter retains [clip attribution](docs/ESC10-ATTRIBUTION.md). No audio, caches or model binaries are published.
