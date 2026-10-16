@@ -1,117 +1,43 @@
-# Overlapping Audio Classifier
+# Overlapping environmental sound classification
 
-Classify naturally overlapping environmental sounds with a frozen AudioSet-pretrained PANNs encoder, a trained multilabel head and recording-safe temporal smoothing. Training and controlled follow-ups use real MAESTRO Real v1 audio with a fixed recording-disjoint 29/10/10 split.
+A PyTorch multilabel classifier for naturally overlapping MAESTRO recordings. A frozen PANNs Cnn14 encoder feeds a trained 17-class MLP. Training keeps unknown scene annotations masked; inference applies recording-safe temporal smoothing.
 
-The latest validation-selected five-second head plus centered three-second smoothing achieved **AP 0.40298 across 13 supported classes**, **F1 0.30153 across all 17 observed classes**, and **micro F1 0.47153**. The earlier unsmoothed transfer head scored AP 0.39538, all-class F1 0.29482 and micro F1 0.46061. Validation AP rose from 0.47009 to 0.47670. Several classes still regress, rare events remain weak, and the policy requires three seconds of future context. The holdout was previously observed; these are descriptive custom-split results, not untouched-test or official DCASE scores.
+| Model | Validation AP | Observed test AP | Test micro F1 |
+|---|---:|---:|---:|
+| Five-second transfer head | 0.47009 | 0.39538 | 0.46061 |
+| Selected head + box3 | 0.47670 | 0.40298 | 0.47153 |
 
-Twelve further CPU-trained heads tested slower learning rates, dropout and weight decay across three fixed seeds. None beat the retained smoothing policy on validation. [Report.md](Report.md) gives current commands and results; [the learned follow-up](docs/five-second-learned-v6-evaluation.md) preserves negative results, hardware limits and exact disclosure timing. The broader process was not fully blinded: the V5 observed report was read after V6 protocol/code freeze but before V6 selection completed. Earlier context studies and the failed smoke remain in [transfer evaluation](docs/transfer-evaluation.md), [aggregate evidence](docs/transfer-results.json), [scratch evaluation](docs/maestro-evaluation.md), and [independent audit](docs/independent-audit.md).
+The improvement is small. Children voices, coffee machine and shopping cart lost AP. Several classes have absent or extremely thin supervision. Inference needs three seconds of future context.
 
-## Pretrained encoder workflow
+## Notebooks
 
-A frozen PANNs Cnn14 AudioSet encoder and validation-selected masked soft-label heads
-are implemented in `overlap_audio.transfer`. The follow-up uses the **already-observed**
-recording holdout; it cannot restore untouched evaluation. The frozen hypothesis,
-three head candidates, licensing, exact encoder identity and historical 45-minute
-experiment budget are in [transfer-protocol.md](docs/transfer-protocol.md). The user
-later removed artificial GPU caps; the subsequent GPU rejection was Kaggle's
-weekly service quota, and actual head training continued on CPU.
+- [Data and label audit](notebooks/01_results_eda.ipynb): recording counts, source checks, soft labels and class coverage.
+- [Model and experiments](notebooks/02_complete_natural_audio_workflow.ipynb): visible preprocessing, models, loss, scorer, training loop, actual full-data replay and learning curves.
+- [Results and inference](notebooks/03_results_and_inference.ipynb): class errors, support, thresholds and actual saved-waveform proof.
 
-```bash
-python -m pip install -e ".[dev,transfer]"
-python -m overlap_audio.transfer prepare --root data/external/maestro --output data/processed/transfer-v2 --weights data/external/panns/Cnn14.pth --device cuda --context-seconds 5
-python -m overlap_audio.transfer train --cache data/processed/transfer-v2 --output models/transfer-v2 --epochs 80 --device cuda
-python -m overlap_audio.transfer predict --checkpoint models/transfer-v2/selected.pt --weights data/external/panns/Cnn14.pth --audio your-recording.wav --output data/processed/transfer-prediction.json
-```
+The notebooks retain executed tables and plots. They never rescore the observed test. Data and weights stay private.
 
-Preparation downloads the original encoder weights if absent and checks the
-publisher checksum. The trained checkpoint requires that exact encoder SHA256,
-training-only feature scaling and validation thresholds. Use fresh cache and run
-directories: reports cannot be overwritten by repeated holdout evaluation. Retain the [full MAESTRO license](docs/MAESTRO-LICENSE.txt) with private artifacts.
-No audio, derived embeddings or weights are redistributed. Native PANNs preprocessing uses
-32 kHz audio and five-second offline context, so this remains unsuitable for
-streaming or exact event-boundary localization.
+## Run
 
-## Scratch CNN reproduction
-
-Use a fresh virtual environment for this repository. On Windows PowerShell:
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -e ".[dev]"
-```
-
-On Linux/macOS, activate with `source .venv/bin/activate` instead. Run the following from this repository in that environment:
-
-```bash
+~~~bash
+python -m pip install -e ".[dev,transfer,notebook]"
 python -m overlap_audio.fetch_maestro --audio
-python -m overlap_audio.natural prepare
-python -m overlap_audio.natural train --epochs 30
-python -m overlap_audio.natural predict --checkpoint models/maestro-v1/selected.pt --audio your-recording.wav --output data/processed/prediction.json
-```
-
-The approximately 2.6 GB natural dataset is licensed for experimental, noncommercial use. Retain its entire license and attribution. Audio, annotation tables, derived caches and learned weights remain local or private. The model uses five seconds of offline context at 16 kHz for each central one-second prediction; it is not streaming recognition, waveform separation or precise event-boundary localization. Recordings are disjoint, but location/session independence is unverified.
-
-The commands use current audited source, including robustness guards added after the completed cloud run launched. Exact execution evidence uses the archived source revision and environment. Do not repeatedly tune against the now-observed test split. The earlier version-1 run failed before training on one annotation roundoff excursion; that failure is retained, not hidden.
-
-## Earlier controlled mixture baselines
-
-The following ESC-10 and synthetic-tone experiments are separate baseline tasks. Their scores are not directly comparable to naturally overlapping MAESTRO recordings.
-
-A PyTorch pipeline for multilabel sound presence classification in noisy, overlapping audio. It includes a spectrogram CNN, class-aware focal loss, rare-positive sampling, waveform augmentation, spectrogram masking, validation-selected thresholds and original-recording-disjoint evaluation.
-
-This is **clip classification**, not waveform source separation or event localization. The executed demos include synthetic tones and mixtures of a real ESC-10 subset; neither establishes field-recording or extreme 1:1000 performance.
-
-## Install and reproduce
-
-```bash
-python -m pip install -e ".[dev]"
-overlap-audio synthetic
-overlap-audio train data/raw/synthetic/manifest.json --epochs 12 --count 512 --checkpoint models/synthetic.pt --report docs/synthetic-results.json
-overlap-audio fetch-esc --per-fold 2
-overlap-audio train data/external/esc10/manifest.json --epochs 15 --count 512 --checkpoint models/esc10.pt --report docs/esc10-results.json
-overlap-audio predict models/esc10.pt data/external/esc10/audio/1-100032-A-0.wav
+python -m overlap_audio.transfer prepare --root data/external/maestro --output data/features/five-second-cache --weights data/external/panns/Cnn14.pth --device cpu --context-seconds 5
+python train.py --cache data/features/five-second-cache --output models/my-fresh-run --config control --device cpu
+python evaluation_scripts/evaluate.py --checkpoint models/my-fresh-run/selected.pt --cache-five data/features/five-second-cache --output data/reports/my-validation.json
 python -m pytest -q
-```
+~~~
 
-The fetch command downloads **40 actual public WAV files**, official metadata and attribution from a pinned ESC-50 revision. It selects only ESC-10 licensed rows from dog, rain, crying baby and clock tick, two clips per class per official fold. Original Freesound recording IDs are checked before any waveform mixing. Folds 1â€“3 train, fold 4 validation, fold 5 test. The test source recordings never appear in training mixtures. See [provenance and clip hashes](docs/dataset-provenance.json), [selected contributor attribution](docs/ESC10-ATTRIBUTION.md), and [methodology](docs/methodology.md).
+Feature extraction needs substantial RAM; use cloud compute on a limited-memory host. Root training fits a fresh three-seed configuration using train/validation only and rejects existing outputs. It does not reproduce the historical winner merely by using its name.
 
-Audio files and checkpoints remain local and ignored; reproduce them with the commands above. The manifest stores absolute local paths. Move data by regenerating or editing the local manifest. Only aggregate metrics and public provenance are committed.
+For the privately retained production artifact:
 
-## Earlier ESC-10 mixture results
+~~~bash
+python -m overlap_audio.postprocess predict --checkpoint models/postprocess-v5/selected.pt --weights data/external/panns/Cnn14.pth --audio data/my-recording.wav --output data/my-new-prediction.json
+~~~
 
-The real-audio mixture run achieved **macro F1 0.490**, **micro F1 0.651** and **macro AP 0.644**, compared with always-present macro F1 0.446. The rare clock-tick class scored **F1 0.0** with six test positives; this baseline does not solve rare-event detection. Training supports were 388/196/91/9, approximately 43:1 imbalance. There were 23/7/7 distinct original train/validation/test recordings among 24/8/8 clips.
+## Scope and sources
 
-## Earlier mixture pipeline
+This is a custom 29/10/10 recording split, not the official DCASE five-fold benchmark. Test results are already observed; repeated validation selection, scene bias and unknown location/session overlap limit generalization.
 
-1. Decode 16-bit PCM WAV, average channels, anti-alias resample to 8 kHz and center crop/pad to one second.
-2. Validate original source IDs across splits, then mix one or more source classes with random shifts and relative gain. Class inclusion probabilities are .65/.35/.15/.03; empty draws receive one weighted class.
-3. Compute log-power STFT (256-point Hann window, 128-sample hop). Preserve coarse frequency positions through CNN pooling.
-4. Train with per-class focal alpha derived from training prevalence and inverse-prevalence weighted sampling. Augment with gain/noise/time shifts and time/frequency masks.
-5. Select each class threshold on validation F1 only. Report held-out macro/micro F1, per-class AP/support and an always-present baseline. Checkpoints contain weights, classes and thresholds and load with `weights_only=True`.
-
-Use `--rare-probability 0.001 --count 8192` for an unmeasured extreme-imbalance experiment. Larger mixture counts are needed to retain rare positives; training rejects any omitted class. This option controls class inclusion before the nonempty-mixture fallback, so always inspect realized positive supports. The committed runs use .03.
-
-Training runs on CPU by default with two Torch threads. `--count` controls training mixtures; each evaluation split uses max(128, count/2) mixtures. Seed 42 is fixed in the CLI for reproducibility. The Python `train` API exposes seed and thread arguments.
-
-## Executed evidence
-
-[Modulated-tone smoke](docs/synthetic-results.json) trains on 512 mixtures with training positive supports 379/199/77/15, approximately 25:1 imbalance, and evaluates 256 held-out mixtures. Its perfect score reflects an intentionally easy frequency-recognition task. [Real ESC-10 mixture run](docs/esc10-results.json) evaluates source-disjoint mixtures from a tiny four-class subset and reports actual measured results, including weak classes. These metrics must not be described as full ESC-50 results or natural overlapping-call benchmarks.
-
-## Layout
-
-Production code is in `src/overlap_audio/`. Requested pipeline entry points live in `src/data/`, `src/features/`, `src/models/` and `src/visualization/`; shared repository paths are in `src/config.py`. The notebook only explores saved metrics. `data/{raw,external,interim,processed}` and model binaries are ignored. CI runs tests and one actual training epoch.
-
-## Earlier mixture limitations
-
-Center crops may omit an event while retaining its source-file label. Synthetic mixing creates approximate presence labels, not verified per-window annotations. One-second 8 kHz input discards long context and high-frequency calls. Noise is synthetic; no denoising or source extraction is implemented. Two clips per class/fold provide very weak evidence of recording diversity, and reused sources make mixtures statistically dependent within each split. No confidence intervals or deployment claims are made. Checkpoints should be treated as experimental artifacts. Increase source diversity and evaluate annotated real mixtures before considering practical use.
-
-Code MIT licensed. ESC-10 data retain CC BY 3.0 and individual Freesound attribution; full ESC-50 licensing is different. No audio files are redistributed in this repository.
-
-### Explicit training and evaluation
-
-`python train.py --cache data/features/five-second-cache --output models/my-fresh-run --config slower --device cpu` trains a three-seed cached PANNs head ensemble using train/validation only. Caches must come from the pinned authentic feature extraction contracts; pretrained weights and audio remain ignored. This command does not open test data. Outputs must not already exist.
-
-`python evaluation_scripts/evaluate.py --checkpoint models/my-fresh-run/selected.pt --cache-five data/features/five-second-cache --output reports/my-validation.json` evaluates the saved ensemble on validation. Add `--cache-one` only for policies retaining central-context branches. Test evaluation requires both `--split test` and `--acknowledge-observed-test`; this acknowledges prior observation, not independent generalization. Neither command overwrites historical artifacts. Waveform prediction uses `python -m overlap_audio.postprocess predict --help`. See [Report.md](Report.md) for concise results and negative experiments.
-
-[Complete executable natural-audio notebook](notebooks/02_complete_natural_audio_workflow.ipynb): authentic setup, optional fresh training, validation comparisons, actual saved-waveform inference and aggregate plots. Production logic stays in package modules; no implicit observed-test rescore or historical overwrite.
+[Report](Report.md) records the recipe and negative experiments. [Experiment ledger](docs/experiment-ledger.json) retains hashes, failed runs and test-exposure timing. MAESTRO has a [custom experimental/noncommercial license](docs/MAESTRO-LICENSE.txt). PANNs code is MIT; pretrained weights are CC-BY 4.0. The optional ESC-10 adapter retains [clip attribution](docs/ESC10-ATTRIBUTION.md). No audio, caches or model binaries are published.

@@ -1,0 +1,236 @@
+{
+  "data": {
+    "source": "https://zenodo.org/records/7244360",
+    "recordings": 49,
+    "split_recordings": {
+      "train": 29,
+      "validation": 10,
+      "test": 10
+    },
+    "split_seconds": {
+      "train": 6838,
+      "validation": 2163,
+      "test": 2368
+    },
+    "classes": 17,
+    "publisher_files": [
+      {
+        "name": "development_annotation.zip",
+        "md5": "e6a3f84f8020725d559b38ccb494ef3d",
+        "bytes": 877169,
+        "url": "https://zenodo.org/records/7244360/files/development_annotation.zip?download=1"
+      },
+      {
+        "name": "development_audio.zip",
+        "md5": "3de7cb4f92a115a6f5cc077a41ca07b3",
+        "bytes": 2614126654,
+        "url": "https://zenodo.org/records/7244360/files/development_audio.zip?download=1"
+      },
+      {
+        "name": "LICENSE.txt",
+        "md5": "d1111f68bf579834e148db1788ae4cf9",
+        "bytes": 1560,
+        "url": "https://zenodo.org/records/7244360/files/LICENSE.txt?download=1"
+      },
+      {
+        "name": "README.md",
+        "md5": "a8f77695c5933dcfcaea5018bc43c154",
+        "bytes": 4865,
+        "url": "https://zenodo.org/records/7244360/files/README.md?download=1"
+      }
+    ]
+  },
+  "encoder": {
+    "source": "https://zenodo.org/records/3987831",
+    "native_sample_rate": 32000,
+    "sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31"
+  },
+  "protocol_history": {
+    "transfer-protocol.md": {
+      "original_commit": "96d4f72",
+      "sha256": "34ca372c858030528c8cde00925475b53988f789d421000849170d373826dfb2"
+    },
+    "transfer-context-protocol.md": {
+      "original_commit": "102a607",
+      "sha256": "0c7ba731b704752a0d77449a8756667b89cbf1b30fd05405df5a2fdf9d2cca6a"
+    },
+    "transfer-lr-protocol.md": {
+      "original_commit": "7fe283a",
+      "sha256": "1871d8a840ca1b3b6b4439f1e931b31d027140de65b7a355bf2bc25b1681cb6f"
+    },
+    "postprocess-v5-protocol.json": {
+      "original_commit": "b4da9eb",
+      "sha256": "1ab32b43e5cdbb1d530d8975bc3d0c59f5c9ce8f08b9e3b1f9923ae3de4b0136"
+    },
+    "five-second-learned-v6-protocol.json": {
+      "original_commit": "9d7d69f",
+      "sha256": "93695979db01b581a1588570369b1b4f5c9328ec0a9ac81cd723c89cd4c2b202"
+    }
+  },
+  "runs": [
+    {
+      "study": "Scratch CNN",
+      "validation_AP": 0.4155227554341157,
+      "observed_test_AP": 0.37616953624484056
+    },
+    {
+      "study": "five_second",
+      "validation_AP": 0.47008825693046674,
+      "observed_test_AP": 0.3953760049234216
+    },
+    {
+      "study": "one_second",
+      "validation_AP": 0.4128862377256155,
+      "observed_test_AP": 0.33693209467813945
+    },
+    {
+      "study": "one_second_lower_lr",
+      "validation_AP": 0.4143231768005838,
+      "observed_test_AP": 0.3368427198416052
+    },
+    {
+      "study": "V5 box3",
+      "validation_AP": 0.4767020190677916,
+      "observed_test_AP": 0.40297549932550353,
+      "seconds": 1018.8511075973511
+    },
+    {
+      "study": "V6 four configurations \u00d7 three seeds",
+      "best_filtered_validation_AP": 0.4665890631149523,
+      "promoted": false,
+      "CPU_seconds": 630.3854689598083
+    }
+  ],
+  "failed_runs": [
+    {
+      "study": "Initial transfer smoke",
+      "reason": "Inference tensors cannot be saved for backward. Please do not use Tensors created in inference mode in computation tracked by autograd. To work around this, you can make a clone to get a normal tensor and use it in autograd, or use `torch.no_grad()` instead of `torch.inference_mode()`.",
+      "result": "No valid model score; normal tensors cloned for head training."
+    },
+    {
+      "study": "V6 GPU launch",
+      "reason": "Maximum weekly GPU quota of 30.00 hours reached.",
+      "result": "Rejected before start; prospectively amended CPU study, no paid compute or bypass."
+    }
+  ],
+  "private_inputs": {
+    "configs": [
+      {
+        "name": "control",
+        "hidden": 256,
+        "lr": 0.0003,
+        "dropout": 0.3,
+        "weight_decay": 0.01
+      },
+      {
+        "name": "slower",
+        "hidden": 256,
+        "lr": 0.0001,
+        "dropout": 0.3,
+        "weight_decay": 0.01
+      },
+      {
+        "name": "dropout",
+        "hidden": 256,
+        "lr": 0.0001,
+        "dropout": 0.5,
+        "weight_decay": 0.01
+      },
+      {
+        "name": "decay",
+        "hidden": 256,
+        "lr": 0.0001,
+        "dropout": 0.5,
+        "weight_decay": 0.1
+      }
+    ],
+    "seeds": [
+      42,
+      1337,
+      2026
+    ],
+    "device": "cpu",
+    "reference_ap": 0.47008826189752045,
+    "prior_validation_ap": 0.4767020190677916,
+    "test_labels_loaded": false,
+    "input_hashes": {
+      "five_metadata": "a6abdeb3477991ffd46c6ef1d5496caf12898c15544663c7f199cea95037ced4",
+      "one_metadata": "b00af25de14c6427c081f0823322677f3e73075aa1217ef16bf4839efc00efaa",
+      "prior_checkpoint": "d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689",
+      "reference_checkpoint": "12ae9a2f64126cdd0eeb563d8ee70301323e3c35b0bb8dd820b5bfa70083923d"
+    },
+    "cpu_implementation_commit": "77c4617",
+    "learned_source_sha256": "f63c392f0cffe14f85e01a9983764fee2d13aa27b7fc3c49592a6db3787b5304",
+    "frozen_protocol_sha256": "93695979db01b581a1588570369b1b4f5c9328ec0a9ac81cd723c89cd4c2b202",
+    "gpu_submission_started": false
+  },
+  "compute": {
+    "earlier_transfer": "Private free Kaggle GPU",
+    "V6": "Local CPU, Torch2.14/Python3.14, two threads; no encoder allocated",
+    "quota": "GPU weekly quota exhausted at V6 launch"
+  },
+  "test_exposure": "All current test results are previously observed. V5 selection/checkpoint froze before its own test load. V5 aggregate was opened after V6 protocol/code freeze but before V6 selection completed; no V6 grid/objective/seed/stop/promotion rule changed. No fully blinded global-selection claim.",
+  "selected_checkpoint": {
+    "production_checkpoint": "models/postprocess-v5/selected.pt",
+    "production_sha256": "d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689",
+    "v6_saved_state_exactly_equal_to_production": true,
+    "actual_cli_validation_ap": 0.4767020190677916,
+    "actual_cli_validation_matches_frozen_selection": true,
+    "v6_cached_checkpoint_replay_max_difference": 0.0,
+    "production_waveform_inference": "Completed on V5 private GPU; docs/postprocess-v5-actual-inference-proof.json",
+    "new_encoder_training": false,
+    "new_head_promoted": false,
+    "python": "3.14.2",
+    "torch": "2.14.0+cpu",
+    "study_device": "CPU",
+    "torch_threads": 2
+  },
+  "limits": [
+    "Custom recording split, not official DCASE five-fold benchmark.",
+    "Future lookahead3seconds; offline/delayed use.",
+    "Missing/rare supervision and per-class regressions remain.",
+    "CPU/GPU and ensemble-size changes confound seed comparisons.",
+    "No significance, optimality or new-location generalization claim."
+  ],
+  "compute_amendments": [
+    {
+      "commit": "b16abf1",
+      "path": "docs/postprocess-v5-amendment.md",
+      "frozen_git_blob_sha256": "ba91469dc28d6e4beb4bf00f3ae23b4e5440859cd23f942d86a12e1a10db65d1",
+      "meaning": "User withdrew artificial GPU cap before V5 cloud launch; free private resources only."
+    },
+    {
+      "commit": "77c4617",
+      "path": "docs/five-second-learned-v6-cpu-amendment.md",
+      "frozen_git_blob_sha256": "cf63bb2648d7662d422d14ce7cce9ab94fd701670189b809299bf2601eaa8bb6",
+      "meaning": "GPU quota rejection preceded explicit CPU cached-head study; no silent fallback."
+    }
+  ],
+  "run_identities": [
+    {
+      "kernel": "aikyatansinha/portfolio-maestro-panns-transfer-v2",
+      "version": 2,
+      "source_commit": "96d4f72"
+    },
+    {
+      "kernel": "aikyatansinha/portfolio-maestro-panns-central-second-v3",
+      "version": 1,
+      "source_commit": "102a607"
+    },
+    {
+      "kernel": "aikyatansinha/portfolio-maestro-panns-head-lr-v4",
+      "version": 1,
+      "source_commit": "7fe283a"
+    },
+    {
+      "kernel": "aikyatansinha/portfolio-maestro-audio-postprocess-v5",
+      "version": 1,
+      "source_commit": "b16abf1",
+      "source_bundle_sha256": "28f466a5bc307d524b3085778063de3190aabfc96cacfb1c2b1a9f96c288deba"
+    },
+    {
+      "kernel": "aikyatansinha/portfolio-maestro-audio-learned-v6",
+      "status": "Rejected before session creation; CPU study source77c4617"
+    }
+  ]
+}

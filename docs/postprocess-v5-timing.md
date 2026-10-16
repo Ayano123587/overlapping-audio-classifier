@@ -1,7 +1,0 @@
-# Observed-report timing and interpretation
-
-V6 configurations, seeds, objectives, filters, mixture grid, stopping criteria, and code were frozen before V5 test-report inspection. V5 selection and checkpoint were immutable before its own test labels were loaded in the cloud runner. V5 completed, and its observed test aggregate was opened locally **before V6 training/model selection completed**. Thus not all holdout reports stayed closed until a global winner was selected. V5 and V6 share an already observed test split.
-
-V6's own runner still loads test labels only after freezing its full policy and checkpoint. Opening the earlier V5 aggregate while V6 remained in progress is a limitation of the broader intended closed-report process. It does not restore independence, and must not be described as an untouched test or fully blinded global selection. No V6 configuration, objective, candidate grid, optimizer, stopping rule, promotion threshold, or seed was changed in response to the V5 test gains. V6 promotion is determined solely by its fixed validation criterion, even if its observed test subsequently regresses.
-
-The CPU execution amendment preceded all V6 candidate scoring and responded to an explicit Kaggle GPU quota rejection, not a test result. The postprocess and root entrypoint changes after V6 launch affect neither the frozen learned-head candidate computation nor selection.
