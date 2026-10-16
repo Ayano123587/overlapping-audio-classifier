@@ -27,3 +27,19 @@ def test_visible_audio_core_matches_source_and_notebooks_keep_real_outputs():
                 assert output['output_type']!='error'
                 images+=int('image/png' in output.get('data',{}))
     assert images>=8
+
+
+def test_deployment_notebook_visible_policy_and_actual_diagnostics():
+    root=Path(__file__).resolve().parents[1]
+    data=json.loads((root/'notebooks/04_deployment_and_threshold_diagnostics.ipynb').read_text(encoding='utf-8'))
+    visible={node.name:node for cell in data['cells'] if cell['cell_type']=='code'
+             for node in ast.parse(''.join(cell['source'])).body if isinstance(node,(ast.FunctionDef,ast.ClassDef))}
+    for module,names in {'transfer':['Head','predict_head'],
+                         'postprocess':['checked_probabilities','convex_mix','temporal_filter','apply_policy','component_predictions']}.items():
+        nodes={n.name:n for n in ast.parse((root/f'src/overlap_audio/{module}.py').read_text(encoding='utf-8')).body
+               if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
+        for name in names:assert ast.dump(visible[name])==ast.dump(nodes[name]),name
+    outputs=[o for c in data['cells'] for o in c.get('outputs',[])]
+    assert sum('image/png' in o.get('data',{}) for o in outputs)>=3
+    text=''.join(''.join(o.get('text',[])) for o in outputs)
+    assert 'saved_reload_max_difference' in text and 'filter_boundary_replay_max_difference' in text

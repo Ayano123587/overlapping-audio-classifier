@@ -14,6 +14,7 @@ The improvement is small. Children voices, coffee machine and shopping cart lost
 - [Data and label audit](notebooks/01_results_eda.ipynb): recording counts, source checks, soft labels and class coverage.
 - [Model and experiments](notebooks/02_complete_natural_audio_workflow.ipynb): visible preprocessing, models, loss, scorer, training loop, actual full-data replay and learning curves.
 - [Results and inference](notebooks/03_results_and_inference.ipynb): class errors, support, thresholds and actual saved-waveform proof.
+- [Deployment diagnostics](notebooks/04_deployment_and_threshold_diagnostics.ipynb): actual saved-head replay, fixed-threshold mistakes, recording-boundary checks and measured cached inference timing.
 
 The notebooks retain executed tables and plots. They never rescore the observed test. Data and weights stay private.
 
