@@ -1,0 +1,21 @@
+{
+  "before_candidate_scoring": true,
+  "seed": 42,
+  "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "source_protocol_commit": "b4da9eb",
+  "input_sha256": {
+    "central-input/private-embeddings/metadata.json": "b00af25de14c6427c081f0823322677f3e73075aa1217ef16bf4839efc00efaa",
+    "central-input/private-embeddings/validation.npz": "2557d3b0f1cc90b7e7a8e718149a0bd4684fe1aef1302e501a832183cd3375e8",
+    "central-input/transfer-central-v3/linear-soft.pt": "b594ff65e2cbe5135b2ad85689262bc63b24bfa6dd0d4d237b3b2b0f1236d7d9",
+    "central-input/transfer-central-v3/linear-balanced.pt": "24fbbedc5247e124a1c2da387fdfd46c4553bd3d21311ff44acbcaf47441995a",
+    "central-input/transfer-central-v3/mlp-balanced.pt": "a711004e302baa290b1a9aad92bd01451f5478fbca98d080e9b02e3abc35ad59",
+    "lr-input/transfer-lr-v4/linear-soft.pt": "742dfd358d01d644201d32fb619edb05b0c95c03ccf2c9e01547d6afef158a33",
+    "lr-input/transfer-lr-v4/linear-balanced.pt": "0933ed4384755c2e08bb6ee6478c9f8088142152fe5213f90c9a92d148b3eee6",
+    "lr-input/transfer-lr-v4/mlp-balanced.pt": "10e0e0aaaa7745e4beb85a5ff99ca2ab8e28c328efec84522091a369e756d9b0"
+  },
+  "private_sources": [
+    "aikyatansinha/portfolio-maestro-panns-central-second-v3",
+    "aikyatansinha/portfolio-maestro-panns-head-lr-v4"
+  ],
+  "test_cache_downloaded": false
+}

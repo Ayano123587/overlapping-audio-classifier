@@ -1,0 +1,275 @@
+{
+  "selected": {
+    "macro_ap_supported": 0.40297549932550353,
+    "macro_f1_supported": 0.3943096771836281,
+    "macro_f1_all_observed_classes": 0.3015309296110097,
+    "official_class_macro_f1_supported": 0.4651628664948724,
+    "official_class_macro_f1_all_observed_classes": 0.4651628664948724,
+    "micro_f1": 0.47152847152847155,
+    "per_class": [
+      {
+        "class": "announcement",
+        "positive": 0,
+        "observed": 483,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "birds_singing",
+        "positive": 56,
+        "observed": 412,
+        "f1": 0.4971098303794861,
+        "ap": 0.31255799531936646
+      },
+      {
+        "class": "brakes_squeaking",
+        "positive": 55,
+        "observed": 481,
+        "f1": 0.25498008728027344,
+        "ap": 0.20120441913604736
+      },
+      {
+        "class": "car",
+        "positive": 689,
+        "observed": 893,
+        "f1": 0.8278622627258301,
+        "ap": 0.9607908725738525
+      },
+      {
+        "class": "cash register beeping",
+        "positive": 0,
+        "observed": 483,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "children voices",
+        "positive": 113,
+        "observed": 2368,
+        "f1": 0.24313725531101227,
+        "ap": 0.16095814108848572
+      },
+      {
+        "class": "coffee machine",
+        "positive": 1,
+        "observed": 391,
+        "f1": 0.005102040711790323,
+        "ap": 0.0035335689317435026
+      },
+      {
+        "class": "cutlery and dishes",
+        "positive": 25,
+        "observed": 391,
+        "f1": 0.0,
+        "ap": 0.0801977664232254
+      },
+      {
+        "class": "door opens/closes",
+        "positive": 0,
+        "observed": 601,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "footsteps",
+        "positive": 213,
+        "observed": 2368,
+        "f1": 0.35782748460769653,
+        "ap": 0.4569845199584961
+      },
+      {
+        "class": "furniture dragging",
+        "positive": 0,
+        "observed": 391,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "large_vehicle",
+        "positive": 112,
+        "observed": 481,
+        "f1": 0.47252747416496277,
+        "ap": 0.5298476219177246
+      },
+      {
+        "class": "metro approaching",
+        "positive": 93,
+        "observed": 601,
+        "f1": 0.6548672318458557,
+        "ap": 0.7046163082122803
+      },
+      {
+        "class": "metro leaving",
+        "positive": 61,
+        "observed": 601,
+        "f1": 0.5114155411720276,
+        "ap": 0.5093750953674316
+      },
+      {
+        "class": "people talking",
+        "positive": 1160,
+        "observed": 2368,
+        "f1": 0.7949367165565491,
+        "ap": 0.881432294845581
+      },
+      {
+        "class": "shopping cart",
+        "positive": 1,
+        "observed": 483,
+        "f1": 0.00413223123177886,
+        "ap": 0.005347593687474728
+      },
+      {
+        "class": "wind_blowing",
+        "positive": 89,
+        "observed": 412,
+        "f1": 0.5021276473999023,
+        "ap": 0.4318352937698364
+      }
+    ],
+    "unsupported_classes": [
+      "announcement",
+      "cash register beeping",
+      "door opens/closes",
+      "furniture dragging"
+    ]
+  },
+  "prior": {
+    "macro_ap_supported": 0.40297549932550353,
+    "macro_f1_supported": 0.3943096771836281,
+    "macro_f1_all_observed_classes": 0.3015309296110097,
+    "official_class_macro_f1_supported": 0.4651628664948724,
+    "official_class_macro_f1_all_observed_classes": 0.4651628664948724,
+    "micro_f1": 0.47152847152847155,
+    "per_class": [
+      {
+        "class": "announcement",
+        "positive": 0,
+        "observed": 483,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "birds_singing",
+        "positive": 56,
+        "observed": 412,
+        "f1": 0.4971098303794861,
+        "ap": 0.31255799531936646
+      },
+      {
+        "class": "brakes_squeaking",
+        "positive": 55,
+        "observed": 481,
+        "f1": 0.25498008728027344,
+        "ap": 0.20120441913604736
+      },
+      {
+        "class": "car",
+        "positive": 689,
+        "observed": 893,
+        "f1": 0.8278622627258301,
+        "ap": 0.9607908725738525
+      },
+      {
+        "class": "cash register beeping",
+        "positive": 0,
+        "observed": 483,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "children voices",
+        "positive": 113,
+        "observed": 2368,
+        "f1": 0.24313725531101227,
+        "ap": 0.16095814108848572
+      },
+      {
+        "class": "coffee machine",
+        "positive": 1,
+        "observed": 391,
+        "f1": 0.005102040711790323,
+        "ap": 0.0035335689317435026
+      },
+      {
+        "class": "cutlery and dishes",
+        "positive": 25,
+        "observed": 391,
+        "f1": 0.0,
+        "ap": 0.0801977664232254
+      },
+      {
+        "class": "door opens/closes",
+        "positive": 0,
+        "observed": 601,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "footsteps",
+        "positive": 213,
+        "observed": 2368,
+        "f1": 0.35782748460769653,
+        "ap": 0.4569845199584961
+      },
+      {
+        "class": "furniture dragging",
+        "positive": 0,
+        "observed": 391,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "large_vehicle",
+        "positive": 112,
+        "observed": 481,
+        "f1": 0.47252747416496277,
+        "ap": 0.5298476219177246
+      },
+      {
+        "class": "metro approaching",
+        "positive": 93,
+        "observed": 601,
+        "f1": 0.6548672318458557,
+        "ap": 0.7046163082122803
+      },
+      {
+        "class": "metro leaving",
+        "positive": 61,
+        "observed": 601,
+        "f1": 0.5114155411720276,
+        "ap": 0.5093750953674316
+      },
+      {
+        "class": "people talking",
+        "positive": 1160,
+        "observed": 2368,
+        "f1": 0.7949367165565491,
+        "ap": 0.881432294845581
+      },
+      {
+        "class": "shopping cart",
+        "positive": 1,
+        "observed": 483,
+        "f1": 0.00413223123177886,
+        "ap": 0.005347593687474728
+      },
+      {
+        "class": "wind_blowing",
+        "positive": 89,
+        "observed": 412,
+        "f1": 0.5021276473999023,
+        "ap": 0.4318352937698364
+      }
+    ],
+    "unsupported_classes": [
+      "announcement",
+      "cash register beeping",
+      "door opens/closes",
+      "furniture dragging"
+    ]
+  },
+  "status": "Observed test, no untouched claim",
+  "selection_unchanged": true,
+  "checkpoint_probability_max_difference": 0.0
+}

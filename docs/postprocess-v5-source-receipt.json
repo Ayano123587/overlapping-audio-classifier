@@ -1,0 +1,8 @@
+{
+  "source_revision": "b16abf1832485de69a808edb326afc28b4c7fa05",
+  "source_bundle_sha256": "28f466a5bc307d524b3085778063de3190aabfc96cacfb1c2b1a9f96c288deba",
+  "elapsed_seconds": 1018.8511075973511,
+  "status": "COMPLETE",
+  "compute_scope": "User removed artificial cap; free private Kaggle, no paid compute",
+  "remaining_service_quota": "unavailable via CLI"
+}

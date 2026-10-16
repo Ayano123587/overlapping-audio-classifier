@@ -1,0 +1,51 @@
+{
+  "configs": [
+    {
+      "name": "control",
+      "hidden": 256,
+      "lr": 0.0003,
+      "dropout": 0.3,
+      "weight_decay": 0.01
+    },
+    {
+      "name": "slower",
+      "hidden": 256,
+      "lr": 0.0001,
+      "dropout": 0.3,
+      "weight_decay": 0.01
+    },
+    {
+      "name": "dropout",
+      "hidden": 256,
+      "lr": 0.0001,
+      "dropout": 0.5,
+      "weight_decay": 0.01
+    },
+    {
+      "name": "decay",
+      "hidden": 256,
+      "lr": 0.0001,
+      "dropout": 0.5,
+      "weight_decay": 0.1
+    }
+  ],
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "device": "cpu",
+  "reference_ap": 0.47008826189752045,
+  "prior_validation_ap": 0.4767020190677916,
+  "test_labels_loaded": false,
+  "input_hashes": {
+    "five_metadata": "a6abdeb3477991ffd46c6ef1d5496caf12898c15544663c7f199cea95037ced4",
+    "one_metadata": "b00af25de14c6427c081f0823322677f3e73075aa1217ef16bf4839efc00efaa",
+    "prior_checkpoint": "d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689",
+    "reference_checkpoint": "12ae9a2f64126cdd0eeb563d8ee70301323e3c35b0bb8dd820b5bfa70083923d"
+  },
+  "cpu_implementation_commit": "77c4617",
+  "learned_source_sha256": "f63c392f0cffe14f85e01a9983764fee2d13aa27b7fc3c49592a6db3787b5304",
+  "frozen_protocol_sha256": "93695979db01b581a1588570369b1b4f5c9328ec0a9ac81cd723c89cd4c2b202",
+  "gpu_submission_started": false
+}

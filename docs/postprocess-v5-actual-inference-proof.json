@@ -1,0 +1,9 @@
+{
+  "rows": 5,
+  "probabilities": 85,
+  "finite_in_unit_interval": true,
+  "probe_source_record": "cafe_restaurant_04",
+  "accuracy_claim": false,
+  "lookahead_seconds": 3,
+  "checkpoint_replay_max_difference": 0.0
+}

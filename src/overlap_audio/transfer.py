@@ -160,9 +160,9 @@ def load(cache, split, metadata):
 
 
 class Head(nn.Module):
-    def __init__(self, classes, hidden=0):
+    def __init__(self, classes, hidden=0, dropout=.3):
         super().__init__()
-        self.layers = nn.Sequential(nn.Linear(2048,hidden),nn.ReLU(),nn.Dropout(.3),nn.Linear(hidden,classes)) if hidden else nn.Linear(2048,classes)
+        self.layers = nn.Sequential(nn.Linear(2048,hidden),nn.ReLU(),nn.Dropout(dropout),nn.Linear(hidden,classes)) if hidden else nn.Linear(2048,classes)
 
     def forward(self, x):
         return self.layers(x)

@@ -1,0 +1,15 @@
+{
+  "production_checkpoint": "models/postprocess-v5/selected.pt",
+  "production_sha256": "d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689",
+  "v6_saved_state_exactly_equal_to_production": true,
+  "actual_cli_validation_ap": 0.4767020190677916,
+  "actual_cli_validation_matches_frozen_selection": true,
+  "v6_cached_checkpoint_replay_max_difference": 0.0,
+  "production_waveform_inference": "Completed on V5 private GPU; docs/postprocess-v5-actual-inference-proof.json",
+  "new_encoder_training": false,
+  "new_head_promoted": false,
+  "python": "3.14.2",
+  "torch": "2.14.0+cpu",
+  "study_device": "CPU",
+  "torch_threads": 2
+}

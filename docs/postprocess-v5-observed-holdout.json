@@ -1,0 +1,730 @@
+{
+  "selection": {
+    "baseline_validation_ap": 0.47008825693046674,
+    "selected_validation_ap": 0.4767020190677916,
+    "improved": true,
+    "selected_policy": {
+      "name": "central-0-final-{'kind': 'box', 'width': 3}",
+      "branches": [
+        {
+          "weights": [
+            1
+          ],
+          "filters": []
+        }
+      ],
+      "mix_weights": [
+        1
+      ],
+      "filters": [
+        {
+          "kind": "box",
+          "width": 3
+        }
+      ]
+    },
+    "retained_component_indices": [
+      6
+    ],
+    "candidates": [
+      {
+        "policy": {
+          "name": "five-second-baseline",
+          "branches": [
+            {
+              "weights": [
+                0,
+                0,
+                0.5,
+                0,
+                0,
+                0.5,
+                0
+              ],
+              "filters": [
+                {
+                  "kind": "box",
+                  "width": 5
+                }
+              ]
+            },
+            {
+              "weights": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "filters": []
+            }
+          ],
+          "mix_weights": [
+            0,
+            1
+          ],
+          "filters": []
+        },
+        "validation_ap": 0.47008825693046674
+      },
+      {
+        "policy": {
+          "name": "central-stage1",
+          "branches": [
+            {
+              "weights": [
+                0,
+                0,
+                0.5,
+                0,
+                0,
+                0.5,
+                0
+              ],
+              "filters": []
+            },
+            {
+              "weights": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "filters": []
+            }
+          ],
+          "mix_weights": [
+            1,
+            0
+          ],
+          "filters": []
+        },
+        "validation_ap": 0.4137886584503576
+      },
+      {
+        "policy": {
+          "name": "central-stage2",
+          "branches": [
+            {
+              "weights": [
+                0,
+                0,
+                0.5,
+                0,
+                0,
+                0.5,
+                0
+              ],
+              "filters": [
+                {
+                  "kind": "box",
+                  "width": 5
+                }
+              ]
+            },
+            {
+              "weights": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "filters": []
+            }
+          ],
+          "mix_weights": [
+            1,
+            0
+          ],
+          "filters": []
+        },
+        "validation_ap": 0.43952321164154756
+      },
+      {
+        "policy": {
+          "name": "central-0-final-{'kind': 'none'}",
+          "branches": [
+            {
+              "weights": [
+                0,
+                0,
+                0.5,
+                0,
+                0,
+                0.5,
+                0
+              ],
+              "filters": [
+                {
+                  "kind": "box",
+                  "width": 5
+                }
+              ]
+            },
+            {
+              "weights": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "filters": []
+            }
+          ],
+          "mix_weights": [
+            0,
+            1
+          ],
+          "filters": [
+            {
+              "kind": "none"
+            }
+          ]
+        },
+        "validation_ap": 0.47008825693046674
+      },
+      {
+        "policy": {
+          "name": "central-0-final-{'kind': 'box', 'width': 3}",
+          "branches": [
+            {
+              "weights": [
+                0,
+                0,
+                0.5,
+                0,
+                0,
+                0.5,
+                0
+              ],
+              "filters": [
+                {
+                  "kind": "box",
+                  "width": 5
+                }
+              ]
+            },
+            {
+              "weights": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "filters": []
+            }
+          ],
+          "mix_weights": [
+            0,
+            1
+          ],
+          "filters": [
+            {
+              "kind": "box",
+              "width": 3
+            }
+          ]
+        },
+        "validation_ap": 0.4767020190677916
+      },
+      {
+        "policy": {
+          "name": "central-0.25-final-{'kind': 'none'}",
+          "branches": [
+            {
+              "weights": [
+                0,
+                0,
+                0.5,
+                0,
+                0,
+                0.5,
+                0
+              ],
+              "filters": [
+                {
+                  "kind": "box",
+                  "width": 5
+                }
+              ]
+            },
+            {
+              "weights": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "filters": []
+            }
+          ],
+          "mix_weights": [
+            0.25,
+            0.75
+          ],
+          "filters": [
+            {
+              "kind": "none"
+            }
+          ]
+        },
+        "validation_ap": 0.4664243476775785
+      },
+      {
+        "policy": {
+          "name": "central-0.25-final-{'kind': 'box', 'width': 3}",
+          "branches": [
+            {
+              "weights": [
+                0,
+                0,
+                0.5,
+                0,
+                0,
+                0.5,
+                0
+              ],
+              "filters": [
+                {
+                  "kind": "box",
+                  "width": 5
+                }
+              ]
+            },
+            {
+              "weights": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "filters": []
+            }
+          ],
+          "mix_weights": [
+            0.25,
+            0.75
+          ],
+          "filters": [
+            {
+              "kind": "box",
+              "width": 3
+            }
+          ]
+        },
+        "validation_ap": 0.4704993891646154
+      },
+      {
+        "policy": {
+          "name": "central-0.5-final-{'kind': 'none'}",
+          "branches": [
+            {
+              "weights": [
+                0,
+                0,
+                0.5,
+                0,
+                0,
+                0.5,
+                0
+              ],
+              "filters": [
+                {
+                  "kind": "box",
+                  "width": 5
+                }
+              ]
+            },
+            {
+              "weights": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "filters": []
+            }
+          ],
+          "mix_weights": [
+            0.5,
+            0.5
+          ],
+          "filters": [
+            {
+              "kind": "none"
+            }
+          ]
+        },
+        "validation_ap": 0.45897627833376947
+      },
+      {
+        "policy": {
+          "name": "central-0.5-final-{'kind': 'box', 'width': 3}",
+          "branches": [
+            {
+              "weights": [
+                0,
+                0,
+                0.5,
+                0,
+                0,
+                0.5,
+                0
+              ],
+              "filters": [
+                {
+                  "kind": "box",
+                  "width": 5
+                }
+              ]
+            },
+            {
+              "weights": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "filters": []
+            }
+          ],
+          "mix_weights": [
+            0.5,
+            0.5
+          ],
+          "filters": [
+            {
+              "kind": "box",
+              "width": 3
+            }
+          ]
+        },
+        "validation_ap": 0.4591674021988486
+      }
+    ],
+    "thresholds": [
+      0.5,
+      0.6000000238418579,
+      0.800000011920929,
+      0.6499999761581421,
+      0.5,
+      0.75,
+      0.5,
+      0.8500000238418579,
+      0.5,
+      0.75,
+      0.5,
+      0.699999988079071,
+      0.75,
+      0.75,
+      0.29999998211860657,
+      0.5,
+      0.8500000238418579
+    ],
+    "lookahead_seconds": 3,
+    "test_labels_loaded_at_selection": false,
+    "checkpoint_sha256": "d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689"
+  },
+  "observed_holdout_status": "Previously observed; no untouched claim",
+  "selected": {
+    "macro_ap_supported": 0.40297549932550353,
+    "macro_f1_supported": 0.3943096771836281,
+    "macro_f1_all_observed_classes": 0.3015309296110097,
+    "official_class_macro_f1_supported": 0.4651628664948724,
+    "official_class_macro_f1_all_observed_classes": 0.4651628664948724,
+    "micro_f1": 0.47152847152847155,
+    "per_class": [
+      {
+        "class": "announcement",
+        "positive": 0,
+        "observed": 483,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "birds_singing",
+        "positive": 56,
+        "observed": 412,
+        "f1": 0.4971098303794861,
+        "ap": 0.31255799531936646
+      },
+      {
+        "class": "brakes_squeaking",
+        "positive": 55,
+        "observed": 481,
+        "f1": 0.25498008728027344,
+        "ap": 0.20120441913604736
+      },
+      {
+        "class": "car",
+        "positive": 689,
+        "observed": 893,
+        "f1": 0.8278622627258301,
+        "ap": 0.9607908725738525
+      },
+      {
+        "class": "cash register beeping",
+        "positive": 0,
+        "observed": 483,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "children voices",
+        "positive": 113,
+        "observed": 2368,
+        "f1": 0.24313725531101227,
+        "ap": 0.16095814108848572
+      },
+      {
+        "class": "coffee machine",
+        "positive": 1,
+        "observed": 391,
+        "f1": 0.005102040711790323,
+        "ap": 0.0035335689317435026
+      },
+      {
+        "class": "cutlery and dishes",
+        "positive": 25,
+        "observed": 391,
+        "f1": 0.0,
+        "ap": 0.0801977664232254
+      },
+      {
+        "class": "door opens/closes",
+        "positive": 0,
+        "observed": 601,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "footsteps",
+        "positive": 213,
+        "observed": 2368,
+        "f1": 0.35782748460769653,
+        "ap": 0.4569845199584961
+      },
+      {
+        "class": "furniture dragging",
+        "positive": 0,
+        "observed": 391,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "large_vehicle",
+        "positive": 112,
+        "observed": 481,
+        "f1": 0.47252747416496277,
+        "ap": 0.5298476219177246
+      },
+      {
+        "class": "metro approaching",
+        "positive": 93,
+        "observed": 601,
+        "f1": 0.6548672318458557,
+        "ap": 0.7046163082122803
+      },
+      {
+        "class": "metro leaving",
+        "positive": 61,
+        "observed": 601,
+        "f1": 0.5114155411720276,
+        "ap": 0.5093750953674316
+      },
+      {
+        "class": "people talking",
+        "positive": 1160,
+        "observed": 2368,
+        "f1": 0.7949367165565491,
+        "ap": 0.881432294845581
+      },
+      {
+        "class": "shopping cart",
+        "positive": 1,
+        "observed": 483,
+        "f1": 0.00413223123177886,
+        "ap": 0.005347593687474728
+      },
+      {
+        "class": "wind_blowing",
+        "positive": 89,
+        "observed": 412,
+        "f1": 0.5021276473999023,
+        "ap": 0.4318352937698364
+      }
+    ],
+    "unsupported_classes": [
+      "announcement",
+      "cash register beeping",
+      "door opens/closes",
+      "furniture dragging"
+    ]
+  },
+  "five_second_baseline": {
+    "macro_ap_supported": 0.39537603243325764,
+    "macro_f1_supported": 0.38553691426148784,
+    "macro_f1_all_observed_classes": 0.2948223461999613,
+    "official_class_macro_f1_supported": 0.4547950557687066,
+    "official_class_macro_f1_all_observed_classes": 0.4547950557687066,
+    "micro_f1": 0.4606073705825138,
+    "per_class": [
+      {
+        "class": "announcement",
+        "positive": 0,
+        "observed": 483,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "birds_singing",
+        "positive": 56,
+        "observed": 412,
+        "f1": 0.47727271914482117,
+        "ap": 0.3006627559661865
+      },
+      {
+        "class": "brakes_squeaking",
+        "positive": 55,
+        "observed": 481,
+        "f1": 0.20459289848804474,
+        "ap": 0.19804859161376953
+      },
+      {
+        "class": "car",
+        "positive": 689,
+        "observed": 893,
+        "f1": 0.8219178318977356,
+        "ap": 0.9584276676177979
+      },
+      {
+        "class": "cash register beeping",
+        "positive": 0,
+        "observed": 483,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "children voices",
+        "positive": 113,
+        "observed": 2368,
+        "f1": 0.2604166567325592,
+        "ap": 0.1619456708431244
+      },
+      {
+        "class": "coffee machine",
+        "positive": 1,
+        "observed": 391,
+        "f1": 0.005102040711790323,
+        "ap": 0.004081632476300001
+      },
+      {
+        "class": "cutlery and dishes",
+        "positive": 25,
+        "observed": 391,
+        "f1": 0.0,
+        "ap": 0.07947789132595062
+      },
+      {
+        "class": "door opens/closes",
+        "positive": 0,
+        "observed": 601,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "footsteps",
+        "positive": 213,
+        "observed": 2368,
+        "f1": 0.35355648398399353,
+        "ap": 0.4418984353542328
+      },
+      {
+        "class": "furniture dragging",
+        "positive": 0,
+        "observed": 391,
+        "f1": 0.0,
+        "ap": null
+      },
+      {
+        "class": "large_vehicle",
+        "positive": 112,
+        "observed": 481,
+        "f1": 0.47567567229270935,
+        "ap": 0.5221260786056519
+      },
+      {
+        "class": "metro approaching",
+        "positive": 93,
+        "observed": 601,
+        "f1": 0.6519823670387268,
+        "ap": 0.6984875202178955
+      },
+      {
+        "class": "metro leaving",
+        "positive": 61,
+        "observed": 601,
+        "f1": 0.4912280738353729,
+        "ap": 0.46944165229797363
+      },
+      {
+        "class": "people talking",
+        "positive": 1160,
+        "observed": 2368,
+        "f1": 0.7879884243011475,
+        "ap": 0.8764008283615112
+      },
+      {
+        "class": "shopping cart",
+        "positive": 1,
+        "observed": 483,
+        "f1": 0.00413223123177886,
+        "ap": 0.005376344081014395
+      },
+      {
+        "class": "wind_blowing",
+        "positive": 89,
+        "observed": 412,
+        "f1": 0.4781144857406616,
+        "ap": 0.42351335287094116
+      }
+    ],
+    "unsupported_classes": [
+      "announcement",
+      "cash register beeping",
+      "door opens/closes",
+      "furniture dragging"
+    ]
+  },
+  "selection_sha256_before_test_loading": "da92d3ee23e0703928858f2c33e51f705a1d2e4777858dde45ec832e46bc67ea",
+  "selection_unchanged_after_test": true,
+  "checkpoint_replay_max_difference": 0.0,
+  "test_rows": 2368,
+  "test_recordings": 10
+}

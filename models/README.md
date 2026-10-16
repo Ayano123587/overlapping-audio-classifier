@@ -21,3 +21,5 @@ experimental/noncommercial source terms. Keep the complete MAESTRO notice with
 private copies. Context-specific checkpoints record native 32 kHz preprocessing,
 training-only feature scaling and validation thresholds. The production inference
 command verifies encoder identity before applying the head. No binary is public.
+
+Current retained production wrapper: `postprocess-v5/selected.pt`, SHA256 `d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689`. Same encoder identity as above, five-second context plus recording-safe box3 and three-second lookahead. It passed actual GPU waveform inference. Twelve new CPU heads in `learned-v6-cpu/` did not beat it on validation and are private negative-study artifacts. The V6 resaved checkpoint is state-for-state equal to production; its cached CLI/replay proof is in docs/production-checkpoint-receipt.json. Use `python -m overlap_audio.postprocess predict --help` for guarded waveform inference.

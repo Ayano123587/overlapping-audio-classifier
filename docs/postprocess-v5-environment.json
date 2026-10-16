@@ -1,0 +1,9 @@
+{
+  "python": "3.13.15",
+  "torch": "2.11.0+cu128",
+  "numpy": "2.1.3",
+  "gpu": "Tesla T4",
+  "cpu_stage_replay": true,
+  "five_second_checkpoint_sha256": "12ae9a2f64126cdd0eeb563d8ee70301323e3c35b0bb8dd820b5bfa70083923d",
+  "encoder_weight_sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31"
+}

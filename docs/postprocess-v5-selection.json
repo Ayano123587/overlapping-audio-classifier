@@ -1,0 +1,452 @@
+{
+  "baseline_validation_ap": 0.47008825693046674,
+  "selected_validation_ap": 0.4767020190677916,
+  "improved": true,
+  "selected_policy": {
+    "name": "central-0-final-{'kind': 'box', 'width': 3}",
+    "branches": [
+      {
+        "weights": [
+          1
+        ],
+        "filters": []
+      }
+    ],
+    "mix_weights": [
+      1
+    ],
+    "filters": [
+      {
+        "kind": "box",
+        "width": 3
+      }
+    ]
+  },
+  "retained_component_indices": [
+    6
+  ],
+  "candidates": [
+    {
+      "policy": {
+        "name": "five-second-baseline",
+        "branches": [
+          {
+            "weights": [
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0.5,
+              0
+            ],
+            "filters": [
+              {
+                "kind": "box",
+                "width": 5
+              }
+            ]
+          },
+          {
+            "weights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "filters": []
+          }
+        ],
+        "mix_weights": [
+          0,
+          1
+        ],
+        "filters": []
+      },
+      "validation_ap": 0.47008825693046674
+    },
+    {
+      "policy": {
+        "name": "central-stage1",
+        "branches": [
+          {
+            "weights": [
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0.5,
+              0
+            ],
+            "filters": []
+          },
+          {
+            "weights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "filters": []
+          }
+        ],
+        "mix_weights": [
+          1,
+          0
+        ],
+        "filters": []
+      },
+      "validation_ap": 0.4137886584503576
+    },
+    {
+      "policy": {
+        "name": "central-stage2",
+        "branches": [
+          {
+            "weights": [
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0.5,
+              0
+            ],
+            "filters": [
+              {
+                "kind": "box",
+                "width": 5
+              }
+            ]
+          },
+          {
+            "weights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "filters": []
+          }
+        ],
+        "mix_weights": [
+          1,
+          0
+        ],
+        "filters": []
+      },
+      "validation_ap": 0.43952321164154756
+    },
+    {
+      "policy": {
+        "name": "central-0-final-{'kind': 'none'}",
+        "branches": [
+          {
+            "weights": [
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0.5,
+              0
+            ],
+            "filters": [
+              {
+                "kind": "box",
+                "width": 5
+              }
+            ]
+          },
+          {
+            "weights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "filters": []
+          }
+        ],
+        "mix_weights": [
+          0,
+          1
+        ],
+        "filters": [
+          {
+            "kind": "none"
+          }
+        ]
+      },
+      "validation_ap": 0.47008825693046674
+    },
+    {
+      "policy": {
+        "name": "central-0-final-{'kind': 'box', 'width': 3}",
+        "branches": [
+          {
+            "weights": [
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0.5,
+              0
+            ],
+            "filters": [
+              {
+                "kind": "box",
+                "width": 5
+              }
+            ]
+          },
+          {
+            "weights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "filters": []
+          }
+        ],
+        "mix_weights": [
+          0,
+          1
+        ],
+        "filters": [
+          {
+            "kind": "box",
+            "width": 3
+          }
+        ]
+      },
+      "validation_ap": 0.4767020190677916
+    },
+    {
+      "policy": {
+        "name": "central-0.25-final-{'kind': 'none'}",
+        "branches": [
+          {
+            "weights": [
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0.5,
+              0
+            ],
+            "filters": [
+              {
+                "kind": "box",
+                "width": 5
+              }
+            ]
+          },
+          {
+            "weights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "filters": []
+          }
+        ],
+        "mix_weights": [
+          0.25,
+          0.75
+        ],
+        "filters": [
+          {
+            "kind": "none"
+          }
+        ]
+      },
+      "validation_ap": 0.4664243476775785
+    },
+    {
+      "policy": {
+        "name": "central-0.25-final-{'kind': 'box', 'width': 3}",
+        "branches": [
+          {
+            "weights": [
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0.5,
+              0
+            ],
+            "filters": [
+              {
+                "kind": "box",
+                "width": 5
+              }
+            ]
+          },
+          {
+            "weights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "filters": []
+          }
+        ],
+        "mix_weights": [
+          0.25,
+          0.75
+        ],
+        "filters": [
+          {
+            "kind": "box",
+            "width": 3
+          }
+        ]
+      },
+      "validation_ap": 0.4704993891646154
+    },
+    {
+      "policy": {
+        "name": "central-0.5-final-{'kind': 'none'}",
+        "branches": [
+          {
+            "weights": [
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0.5,
+              0
+            ],
+            "filters": [
+              {
+                "kind": "box",
+                "width": 5
+              }
+            ]
+          },
+          {
+            "weights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "filters": []
+          }
+        ],
+        "mix_weights": [
+          0.5,
+          0.5
+        ],
+        "filters": [
+          {
+            "kind": "none"
+          }
+        ]
+      },
+      "validation_ap": 0.45897627833376947
+    },
+    {
+      "policy": {
+        "name": "central-0.5-final-{'kind': 'box', 'width': 3}",
+        "branches": [
+          {
+            "weights": [
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0.5,
+              0
+            ],
+            "filters": [
+              {
+                "kind": "box",
+                "width": 5
+              }
+            ]
+          },
+          {
+            "weights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "filters": []
+          }
+        ],
+        "mix_weights": [
+          0.5,
+          0.5
+        ],
+        "filters": [
+          {
+            "kind": "box",
+            "width": 3
+          }
+        ]
+      },
+      "validation_ap": 0.4591674021988486
+    }
+  ],
+  "thresholds": [
+    0.5,
+    0.6000000238418579,
+    0.800000011920929,
+    0.6499999761581421,
+    0.5,
+    0.75,
+    0.5,
+    0.8500000238418579,
+    0.5,
+    0.75,
+    0.5,
+    0.699999988079071,
+    0.75,
+    0.75,
+    0.29999998211860657,
+    0.5,
+    0.8500000238418579
+  ],
+  "lookahead_seconds": 3,
+  "test_labels_loaded_at_selection": false,
+  "checkpoint_sha256": "d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689"
+}

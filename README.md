@@ -1,18 +1,20 @@
 # Overlapping Audio Classifier
 
-Classify naturally overlapping environmental sounds with a frozen AudioSet-pretrained PANNs encoder and a trained multilabel head. Three validation-selected head studies completed on real MAESTRO Real v1 audio, with a fixed recording-disjoint 29/10/10 split.
+Classify naturally overlapping environmental sounds with a frozen AudioSet-pretrained PANNs encoder, a trained multilabel head and recording-safe temporal smoothing. Training and controlled follow-ups use real MAESTRO Real v1 audio with a fixed recording-disjoint 29/10/10 split.
 
-The selected five-second transfer model achieved **AP 0.39538 across 13 supported classes**, **F1 0.29482 across all 17 observed classes**, and **micro F1 0.46061**. The earlier scratch CNN scored AP 0.37617, all-observed F1 0.26878 and micro F1 0.46714. Improvement is modest and mixed: micro F1 and several classes regress, and rare events remain weak. The holdout was previously observed; these are descriptive custom-split results, not untouched-test or official DCASE scores.
+The latest validation-selected five-second head plus centered three-second smoothing achieved **AP 0.40298 across 13 supported classes**, **F1 0.30153 across all 17 observed classes**, and **micro F1 0.47153**. The earlier unsmoothed transfer head scored AP 0.39538, all-class F1 0.29482 and micro F1 0.46061. Validation AP rose from 0.47009 to 0.47670. Several classes still regress, rare events remain weak, and the policy requires three seconds of future context. The holdout was previously observed; these are descriptive custom-split results, not untouched-test or official DCASE scores.
 
-The final model was locked by validation AP before opening any transfer holdout report. Shorter one-second context and one-third learning rates failed to improve the five-second validation winner. All three studies, the failed smoke, exact source/checkpoint hashes and actual inference checks are documented in the [executed transfer evaluation](docs/transfer-evaluation.md) and [aggregate evidence](docs/transfer-results.json). See the [original scratch evaluation](docs/maestro-evaluation.md) and [independent pipeline audit](docs/independent-audit.md) for baseline history.
+Twelve further CPU-trained heads tested slower learning rates, dropout and weight decay across three fixed seeds. None beat the retained smoothing policy on validation. [Report.md](Report.md) gives current commands and results; [the learned follow-up](docs/five-second-learned-v6-evaluation.md) preserves negative results, hardware limits and exact disclosure timing. The broader process was not fully blinded: the V5 observed report was read after V6 protocol/code freeze but before V6 selection completed. Earlier context studies and the failed smoke remain in [transfer evaluation](docs/transfer-evaluation.md), [aggregate evidence](docs/transfer-results.json), [scratch evaluation](docs/maestro-evaluation.md), and [independent audit](docs/independent-audit.md).
 
 ## Pretrained encoder workflow
 
 A frozen PANNs Cnn14 AudioSet encoder and validation-selected masked soft-label heads
 are implemented in `overlap_audio.transfer`. The follow-up uses the **already-observed**
 recording holdout; it cannot restore untouched evaluation. The frozen hypothesis,
-three head candidates, licensing, exact encoder identity and 45-minute private GPU
-budget are in [transfer-protocol.md](docs/transfer-protocol.md).
+three head candidates, licensing, exact encoder identity and historical 45-minute
+experiment budget are in [transfer-protocol.md](docs/transfer-protocol.md). The user
+later removed artificial GPU caps; the subsequent GPU rejection was Kaggle's
+weekly service quota, and actual head training continued on CPU.
 
 ```bash
 python -m pip install -e ".[dev,transfer]"
@@ -105,3 +107,9 @@ Production code is in `src/overlap_audio/`. Requested pipeline entry points live
 Center crops may omit an event while retaining its source-file label. Synthetic mixing creates approximate presence labels, not verified per-window annotations. One-second 8 kHz input discards long context and high-frequency calls. Noise is synthetic; no denoising or source extraction is implemented. Two clips per class/fold provide very weak evidence of recording diversity, and reused sources make mixtures statistically dependent within each split. No confidence intervals or deployment claims are made. Checkpoints should be treated as experimental artifacts. Increase source diversity and evaluate annotated real mixtures before considering practical use.
 
 Code MIT licensed. ESC-10 data retain CC BY 3.0 and individual Freesound attribution; full ESC-50 licensing is different. No audio files are redistributed in this repository.
+
+### Explicit training and evaluation
+
+`python train.py --cache data/features/five-second-cache --output models/my-fresh-run --config slower --device cpu` trains a three-seed cached PANNs head ensemble using train/validation only. Caches must come from the pinned authentic feature extraction contracts; pretrained weights and audio remain ignored. This command does not open test data. Outputs must not already exist.
+
+`python evaluation_scripts/evaluate.py --checkpoint models/my-fresh-run/selected.pt --cache-five data/features/five-second-cache --output reports/my-validation.json` evaluates the saved ensemble on validation. Add `--cache-one` only for policies retaining central-context branches. Test evaluation requires both `--split test` and `--acknowledge-observed-test`; this acknowledges prior observation, not independent generalization. Neither command overwrites historical artifacts. Waveform prediction uses `python -m overlap_audio.postprocess predict --help`. See [Report.md](Report.md) for concise results and negative experiments.

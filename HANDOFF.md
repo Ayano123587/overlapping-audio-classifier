@@ -1,61 +1,59 @@
-# Completed audio transfer handoff
+# Active audio improvement handoff
 
-Branch: codex/improve-v2. Latest executed source: 7fe283a; original five-second
-executed source: 96d4f72. Final validation policy was locked in bc17133 before any
-transfer holdout report/log was opened. Documentation revision is the commit that
-contains this handoff. Root handles publication; no new repository was created.
+Scope: existing overlapping-audio-classifier only. Branch codex/improve-v2.
+User removed the earlier artificial GPU cap; use free private Kaggle resources,
+fail fast on malformed data/checkpoints, preserve service quota failures, never
+purchase paid compute. Audio has first GPU priority coordinated through root.
 
-Final choice: five-second PANNs Cnn14 frozen encoder + learned 256-unit balanced
-soft-BCE MLP, validation AP 0.470088. One-second context AP 0.412886 and one-third-LR
-one-second AP 0.414323 failed to improve the winner. All nine candidate histories
-are retained. Stop at this validation plateau; no further tuning is planned.
+Postprocessing objective/candidates were frozen before scoring in b4da9eb; exact
+private input hashes and guarded implementation in e12eb4d. Prospective compute
+amendment and five-second-cache retention in b16abf1 preserve original protocol
+history. CPU stages completed: MLP pair AP 0.413789 versus original central 0.412886;
+box-5 smoothing improves pair to 0.439523, still below five-second baseline 0.470088.
+Broader ensembles, box-9 and causal EWMA alternatives were retained, not discarded.
 
-Observed selected-model AP 0.395376 vs scratch 0.376170; all-17-class F1 0.294822
-vs 0.268783; micro F1 0.460607 vs 0.467140. Improvement is modest and mixed. Coffee
-machine/shopping cart have one positive test second each and near-zero F1. Cutlery,
-brakes, car and several other measures regress. No claim of untouched test,
-official five-fold DCASE score, statistical superiority or solved rare events.
+Private GPU aikyatansinha/portfolio-maestro-audio-postprocess-v5 version1 is RUNNING.
+Its frozen source b16abf1, bundle SHA256
+28f466a5bc307d524b3085778063de3190aabfc96cacfb1c2b1a9f96c288deba;
+runner SHA256 eb11211185a929de3318d3498bb8854fdcdc9c0df5b50e1a3111dfeee03f00ed.
+Runner/staging directory D:/CodexData/portfolio/kaggle/audio-postprocess-v5/kernel.
+It downloads authentic audio/license only, validates every used source SHA256,
+requires exact historical five-second validation AP replay, freezes combined policy
+before opening test labels, performs actual waveform inference, and persists complete
+private five-second caches after selection for the next learned study.
 
-Final checks: python -m pytest -q -> 24 passed in 23.42 seconds. Package wheel
-contains transfer modules and upstream MIT notice. Three actual checkpoint
-waveform CLI proofs emitted five seconds / 85 finite probabilities each; cached
-head serialization replay max difference 0.0. Report/selection/source integrity
-and per-class aggregate arithmetic independently checked.
+User explicitly wants actual trained improvement beyond cached postprocessing.
+Next learned protocol frozen in 9d7d69f BEFORE any learned candidate scores or this
+round's test inspection: control, slower learning rate, dropout 0.5, decay 0.1;
+three fixed seeds 42/1337/2026. Choose configuration by equal-seed-ensemble validation
+AP, report every seed/history and mean/std, then fixed smoothing/mixing choices.
+Tests for new learned code pass 6 cases (learned + postprocess) in 75.46 s;
+prior full suite 28 passed in 31.25 s before learned module/optional Head dropout.
+No local encoder allocations. Further full tests needed after learned source settles.
 
-GPU jobs are all terminal. Initial failed smoke 133.39 s, five-second 974.86 s,
-central-second 610.75 s, lower-rate head-only 54.12 s; cumulative measured script
-processing 1773.12 s (29.55 min), within the authorized 45-minute allowance. Version1
-smoke failed before MAESTRO training because an inference tensor entered autograd;
-runner cloned it outside inference mode, with the original failure retained.
-No live local encoder/training process remains. RAG may use the released GPU slot.
+Current next actions: finish learned implementation/testing, wait for V5 terminal,
+retrieve selection/completion before any observed-test report, then launch actual
+multi-seed learned-head GPU study on mounted five-second cache, with no full audio
+refetch. Production selected model uses strict versioned checkpoint schema,
+source identity, train-only moments, class order, pruned zero-weight paths and
+validation thresholds; tests cover masks, boundaries, gaps, causal EWMA, model
+state/normalization failures and exact replay. Preserve all failures and negative
+hypotheses. Root publishes clean commits and manages eventual goal pause.
 
-Private cloud IDs:
-- aikyatansinha/portfolio-maestro-panns-transfer-v2, version2 COMPLETE
-- aikyatansinha/portfolio-maestro-panns-central-second-v3, version1 COMPLETE
-- aikyatansinha/portfolio-maestro-panns-head-lr-v4, version1 COMPLETE
+## Current checkpoint: 16 October 2026 learned round
 
-Private runners, exact hashes and outputs remain under
-D:/CodexData/portfolio/kaggle/audio-transfer-v2,
-audio-transfer-central-v3 and audio-transfer-lr-v4. The central job retained
-private embedding caches/candidate heads, which the LR job mounted and verified.
-No source audio, derived embeddings or model weights are published.
+V5 private GPU kernel completed, elapsed 1018.85 s. Historical five-second validation AP replay was exact; selected box3 AP 0.4767020 versus 0.4700883. Its observed test AP 0.4029755 versus 0.3953760; supported F1 0.3943097; micro F1 0.4715285. Actual real-waveform proof passed (5 rows, 85 finite probabilities), cached checkpoint replay difference 0. Full aggregates and source/environment receipts are under docs/postprocess-v5-*.json. Private checkpoint: D:/CodexData/portfolio/kaggle/audio-postprocess-v5/output/postprocess-v5/selected/selected.pt; SHA256 d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689.
 
-Local usable ignored selected head: models/transfer-v2/selected.pt,
-SHA256 12ae9a2f64126cdd0eeb563d8ee70301323e3c35b0bb8dd820b5bfa70083923d.
-Required ignored encoder: data/external/panns/Cnn14.pth,
-SHA256 0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31.
-Private model folders retain the full MAESTRO license. Encoder attribution is
-under data/external/panns/ATTRIBUTION.txt. Follow-up checkpoints are also retained
-under models/transfer-central-v3 and models/transfer-lr-v4.
+Kaggle rejected V6 launch before execution: maximum weekly GPU quota 30 hours reached. No paid compute or bypass. Source runner retained D:/CodexData/portfolio/kaggle/audio-learned-v6/kernel; public rejection receipt in docs. Prospective CPU amendment commit 77c4617 keeps identical configs/seeds/rules, explicit CPU only, two threads and one head at a time. No local PANNs allocation. Actual study runs exec session 32798, command: PYTHONPATH=src python -u -m overlap_audio.learned --input-root D:/CodexData/portfolio/kaggle/audio-learned-v6/local-input --output models/learned-v6-cpu --device cpu. Train/validation caches authentic and hash-checked. Individual seed checkpoints/histories saved atomically between fits; study protocol records exact private inputs.
 
-Reproduction commands are in README.md and docs/transfer-evaluation.md. Production
-CLI: python -m overlap_audio.transfer predict --checkpoint models/transfer-v2/selected.pt
---weights data/external/panns/Cnn14.pth --audio YOUR_WAV --output data/processed/prediction.json.
-Use the complete command on one line. Cache/training commands use fresh directories;
-checkpoint inference verifies encoder identity/scaling/thresholds.
+V5 observed aggregate was opened after V6 protocol/code freeze but BEFORE V6 selection completed; see docs/postprocess-v5-timing.md. Do not claim fully blinded global selection or untouched test. No candidate/rule changes based on that report. V6 own labels open only after final policy/checkpoint.
 
-Remaining limits: observed holdout, one seed, few recordings, unknown location/
-session independence, uncertain labels, unsupported/rare classes, native-rate and
-pretraining-duration confounders, unaudited pretraining source overlap, and selected
-model's offline future context. Official-fold evaluation, streaming recognition and precise event-boundary
-localization are not implemented or claimed. No unfinished training or additional project work.
+Root train.py is train/validation only; evaluation_scripts/evaluate.py defaults validation, requires explicit observed-test acknowledgement and fresh outputs. Report.md carries concise history. Full suite: 32 passed, 86.52 s after final source changes. Root publishes; source/docs only. Next: finish V6 immutable selection, observed report and actual checkpoint proof, document negative hypotheses and stop on evidence/quota rather than fabricate gains.
+
+## FINAL authoritative state: completed audio round
+
+No active audio jobs or training processes remain. V5 GPU COMPLETE; V6 GPU submission REJECTED before start due weekly 30-hour quota; no retry/payment/bypass. V6 explicit CPU study completed all twelve fits in 630.39 s. Every new three-seed configuration, smoothing alternative and fixed mixture failed to beat prior validation AP 0.4767020191. Retain original V5 production checkpoint at models/postprocess-v5/selected.pt, SHA256 d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689. Exact encoder remains data/external/panns/Cnn14.pth, SHA256 0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31. Root may copy these ignored files into original repository; never publish binaries/data.
+
+Actual V6 saved state equals retained production recursively including every tensor, normalization, threshold, class and policy. Actual evaluation_scripts CLI on V6 saved checkpoint matched frozen validation AP exactly; test replay difference zero and immutable selection unchanged. Original retained production passed GPU real-waveform proof (5 rows/85 finite probabilities). Observed test AP 0.4029754993, all-class F1 .3015309296, supported F1 .3943096772, micro F1 .4715284715. Per-class regressions/rare limitations and earlier-report timing caveat explicit. Full 32 tests passed after final source changes; subsequent edits aggregate/docs/notebook only.
+
+Public evidence: docs/postprocess-v5-*.json, docs/five-second-learned-v6-{protocol,selection,observed-holdout,completion,cli-validation}.json, docs/production-checkpoint-receipt.json; readable Report.md and docs/five-second-learned-v6-evaluation.md. Private inputs/runner under D:/CodexData/portfolio/kaggle/audio-learned-v6; historical cache hashes and source receipts pinned. Every individual seed history retained in aggregate selection and ignored checkpoints. Notebook EDA only. No claim of untouched test, solved rare classes, encoder fine-tuning, statistical significance, or optimality. No further identical-grid tuning justified by early validation plateau; new encoder/data hypothesis requires separate protocol and available compute. Root handles publication/CI/user goal management.
