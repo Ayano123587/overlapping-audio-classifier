@@ -1,6 +1,6 @@
-# Import your own PCM WAV collection
+# Optional synthetic-overlap adapter
 
-The training command accepts a JSON manifest; no external hub service is required. Build this structure from your audio catalog:
+The optional `overlap-audio train` command mixes single-source PCM clips into synthetic overlaps. It is separate from the real MAESTRO workflow, whose root `train.py` consumes the complete feature cache. This adapter does not supply the reported MAESTRO results. Build a JSON manifest from your own licensed audio catalog:
 
 ```json
 {
@@ -10,6 +10,12 @@ The training command accepts a JSON manifest; no external hub service is require
     {"path": "/absolute/path/audio.wav", "label": 0, "source": "original-recording-id", "split": "train"}
   ]
 }
+```
+
+Run the optional adapter with fresh local output paths:
+
+```bash
+overlap-audio train data/my-manifest.json --checkpoint models/my-mixture.pt --report data/reports/my-mixture.json
 ```
 
 Each source file has one source class; the pipeline creates multilabel overlap mixtures. Supply at least one source for every class in each of train, validation and test. `label` is the zero-based class index. Every excerpt from a shared original recording must use the same `source` ID and split. Do not assign different IDs to cropped segments from the same recording. Include recording-level provenance and license in your private catalog. For non-four-class inputs, class inclusion probabilities default to .4 each.

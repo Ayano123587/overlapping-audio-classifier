@@ -7,16 +7,18 @@ A PyTorch multilabel classifier for naturally overlapping MAESTRO recordings. Th
 | Five-second transfer head | 0.47009 | 0.39538 | 0.46061 |
 | Selected head + box3 | 0.47670 | 0.40298 | 0.47153 |
 
-The improvement is small. Children voices, coffee machine and shopping cart lost AP. Several classes have absent or extremely thin supervision. Inference needs three seconds of future context.
+All seconds in each split are retained. Each class's AP uses only its known annotations; the mean includes classes with known positive labels: 12 validation classes and 13 test classes. The [full-validation diagnostics](docs/selected-validation.json) include all 17 outputs. Missing supervision and classes without validation positives produce unreliable thresholds and false alarms. Inference needs three seconds of future context.
 
 ## Notebooks
 
 - [Data and label audit](notebooks/01_results_eda.ipynb): recording counts, source checks, soft labels and class coverage.
-- [Model and experiments](notebooks/02_complete_natural_audio_workflow.ipynb): visible preprocessing, models, loss, scorer, training loop, actual full-data replay and learning curves.
+- [Training and validation](notebooks/02_complete_natural_audio_workflow.ipynb): visible preprocessing, models, loss, scorer, training loop, actual full-data replay, learning curves and full-validation class errors.
 - [Results and inference](notebooks/03_results_and_inference.ipynb): class errors, support, thresholds and actual saved-waveform proof.
 - [Deployment diagnostics](notebooks/04_deployment_and_threshold_diagnostics.ipynb): actual saved-head replay, fixed-threshold mistakes, recording-boundary checks and measured cached inference timing.
 
-The notebooks retain executed tables and plots. They never rescore the observed test. Data and weights stay private.
+The main notebook was executed end to end on Python 3.13.15 with the exact CPU packages in [requirements-notebook.txt](requirements-notebook.txt). It trains a full-data control, verifies fresh checkpoint reload on all 2,163 validation seconds, then replays the separate retained deployment head. Its first cell checks the runtime. The [execution record](docs/notebook-execution.json) identifies each notebook's artifacts and execution scope. The complete private feature cache and retained checkpoint are required. These analyses do not rescore the observed test.
+
+To rerun the main notebook, create a Python 3.13.15 environment and install `python -m pip install -r requirements-notebook.txt`, then `python -m pip install -e . --no-deps`. The requirements use the official PyTorch CPU wheel index; SoundFile needs libsndfile 1.2.2. Open the notebook from the repository root after restoring the pinned private artifacts.
 
 ## Run
 
@@ -30,7 +32,7 @@ python evaluation_scripts/evaluate.py --checkpoint models/my-fresh-run/selected.
 python -m pytest -q
 ~~~
 
-Feature extraction needs substantial RAM; use cloud compute on a limited-memory host. Root training defaults to the fixed selected recipe: one seed-42, 256-unit head, train-only normalization and class weights, validation checkpoint stopping, fixed box3 smoothing, and validation-only thresholds. It requires the complete pinned 6,838/2,163-row training/validation cache and never opens test labels. Fresh fits reproduce the recipe, not necessarily bit-identical historical weights. Use `--recipe experiment --config control` for the separate three-seed control. The weight acquisition command verifies the published PANNs SHA256 before feature extraction.
+Feature extraction needs substantial RAM; use cloud compute on a limited-memory host. Root training defaults to the fixed selected recipe: one seed-42, 256-unit head, train-only normalization and class weights, validation checkpoint stopping, fixed box3 smoothing, and validation-only thresholds. It requires the complete pinned 6,838/2,163-row training/validation cache and never opens test labels. Fresh fits reproduce the recipe; CPU and CUDA runs can produce different weights and scores. Use `--recipe experiment --config control` for the separate three-seed control. The weight acquisition command verifies the published PANNs SHA256 before feature extraction.
 
 Run the fresh selected checkpoint on a recording:
 

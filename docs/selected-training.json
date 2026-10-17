@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "purpose": "Full-cohort selected-recipe reproduction, not a replacement for the retained CUDA checkpoint.",
+  "receipt": {
+    "source_commit": "dfbaed6bfb889ad19f0dbeeb6d22a87489673588",
+    "kernel": "aikyatansinha/portfolio-maestro-selected-recipe-reproduction-v1",
+    "version": 1,
+    "status": "COMPLETE",
+    "rows": {
+      "train": 6838,
+      "validation": 2163
+    },
+    "test_labels_loaded": false,
+    "input_hashes": {
+      "train": "76f8204ee6bee39189b2d6e858ddb6e56541d33e0c6011560462e64cc9c5b55b",
+      "validation": "37c35c390f040db3fd3b81160aefde66647fd94413a11c5169053157dcd1d57d"
+    },
+    "checkpoint_sha256": "57dc020f58af8756b05593dd7f03d305d16942fc1ce07cc20fa69f458e7955b3",
+    "checkpoint_probability_max_difference": 0.0,
+    "epochs_completed": 20,
+    "best_epoch": 1,
+    "unsmoothed_validation_ap": 0.4672076267306693,
+    "fixed_box3_validation_ap": 0.4695476455187115,
+    "runtime_seconds": 22.618157863616943,
+    "environment": {
+      "torch": "2.11.0+cpu",
+      "device": "cpu",
+      "threads": 2
+    },
+    "retained_environment": {
+      "torch": "2.11.0+cu128",
+      "device": "Tesla T4 CUDA12.8"
+    },
+    "interpretation": "Same source recipe and exact feature archives, not identical training numerics across CPU/CUDA. Dropout RNG engines and matrix kernels differ; their individual contributions were not isolated. Retained validation-best deployment model remains unchanged."
+  },
+  "training_report_sha256": "e1d9de34a27bbd1001a248e2cee849eed7fb4de07326e94c6b11e32aad417958",
+  "verified_receipt_sha256": "34d5ddf5a7a52c1beb1e2ffe31333c505a4877cc318574823c11c027655eccb6",
+  "config": {
+    "name": "mlp-balanced",
+    "hidden": 256,
+    "weight": true,
+    "lr": 0.0003,
+    "dropout": 0.3,
+    "weight_decay": 0.01
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 1.360768924682731,
+      "validation_ap": 0.4672076267306693
+    },
+    {
+      "epoch": 2,
+      "loss": 1.277919160200511,
+      "validation_ap": 0.4583294228068553
+    },
+    {
+      "epoch": 3,
+      "loss": 1.2649769080107098,
+      "validation_ap": 0.4503612010933769
+    },
+    {
+      "epoch": 4,
+      "loss": 1.2565993494930305,
+      "validation_ap": 0.44412760752796504
+    },
+    {
+      "epoch": 5,
+      "loss": 1.2504269419165515,
+      "validation_ap": 0.4360502553366435
+    },
+    {
+      "epoch": 6,
+      "loss": 1.2454389761888203,
+      "validation_ap": 0.43830631093199673
+    },
+    {
+      "epoch": 7,
+      "loss": 1.2408695826233391,
+      "validation_ap": 0.4361278115344855
+    },
+    {
+      "epoch": 8,
+      "loss": 1.2374485194177507,
+      "validation_ap": 0.4367883927382839
+    },
+    {
+      "epoch": 9,
+      "loss": 1.2340184104969083,
+      "validation_ap": 0.4301613290832999
+    },
+    {
+      "epoch": 10,
+      "loss": 1.2309663550970185,
+      "validation_ap": 0.4291960572008975
+    },
+    {
+      "epoch": 11,
+      "loss": 1.2290173512726856,
+      "validation_ap": 0.4292360967374407
+    },
+    {
+      "epoch": 12,
+      "loss": 1.2256907112733004,
+      "validation_ap": 0.42542709862270084
+    },
+    {
+      "epoch": 13,
+      "loss": 1.2240118957047017,
+      "validation_ap": 0.4288265951327048
+    },
+    {
+      "epoch": 14,
+      "loss": 1.2218457798261886,
+      "validation_ap": 0.4255975757841952
+    },
+    {
+      "epoch": 15,
+      "loss": 1.2196506759722214,
+      "validation_ap": 0.42028984910575673
+    },
+    {
+      "epoch": 16,
+      "loss": 1.2183700004632307,
+      "validation_ap": 0.42417585840060684
+    },
+    {
+      "epoch": 17,
+      "loss": 1.216226763110232,
+      "validation_ap": 0.4219363792605388
+    },
+    {
+      "epoch": 18,
+      "loss": 1.2146483463793338,
+      "validation_ap": 0.4235300521249883
+    },
+    {
+      "epoch": 19,
+      "loss": 1.2133058727955601,
+      "validation_ap": 0.4220501846478631
+    },
+    {
+      "epoch": 20,
+      "loss": 1.2117740893510394,
+      "validation_ap": 0.42121756870377186
+    }
+  ],
+  "best_epoch": 1
+}

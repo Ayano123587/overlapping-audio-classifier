@@ -50,7 +50,18 @@
     "path": "models/postprocess-v5/selected.pt",
     "sha256": "d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689",
     "validation_ap": 0.4767020190677916,
-    "saved_head_replay_max_difference": 0.0
+    "saved_head_replay_max_difference": 0.0,
+    "full_validation_audit": {
+      "rows": 2163,
+      "recordings": 10,
+      "all_output_classes": 17,
+      "metrics_record": "docs/selected-validation.json",
+      "kernel": "aikyatansinha/portfolio-maestro-balanced-ensemble-study-v1/1",
+      "independent_audit_sha256": "62122f609791404c33aca06a2d0c208b82fb6a3511d9c1f647cc82a197a36078",
+      "metric_recompute_tolerance": 2e-07,
+      "model_changed": false,
+      "test_repeated": false
+    }
   },
   "selection_protocol": {
     "original_commit": "b4da9eb",

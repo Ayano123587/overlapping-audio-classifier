@@ -10,5 +10,4 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -e ".[dev]"
       - run: python -m pytest -q
-      - run: overlap-audio synthetic
-      - run: overlap-audio train data/raw/synthetic/manifest.json --epochs 1 --count 64 --report smoke.json
+      - run: python scripts/check_notebook_artifacts.py

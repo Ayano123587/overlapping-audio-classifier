@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "hash_rule": "SHA256 of notebook JSON bytes with CRLF container line endings normalized to LF. Cell source/output values are not rewritten.",
+  "notebooks": [
+    {
+      "path": "notebooks/01_results_eda.ipynb",
+      "sha256_lf": "e96f811864c0dffcc3c760db3a091691c422493e4a4c0ab145d5491343899b8f",
+      "code_cells": 7,
+      "executed_code_cells": 7,
+      "error_outputs": 0,
+      "inline_png_outputs": 3,
+      "required_artifacts": [
+        "data/features/five-second-cache/metadata.json",
+        "data/features/five-second-cache/train.npz",
+        "data/features/five-second-cache/validation.npz"
+      ],
+      "execution_scope": "Preserved executed model/data analysis with actual outputs."
+    },
+    {
+      "path": "notebooks/02_complete_natural_audio_workflow.ipynb",
+      "sha256_lf": "d21a678cdef83d2b20528a53aa8e39f263fc741169c01893d651b03aec6f53d7",
+      "code_cells": 13,
+      "executed_code_cells": 13,
+      "error_outputs": 0,
+      "inline_png_outputs": 3,
+      "required_artifacts": [
+        "data/features/five-second-cache/metadata.json",
+        "data/features/five-second-cache/train.npz",
+        "data/features/five-second-cache/validation.npz",
+        "models/postprocess-v5/selected.pt"
+      ],
+      "execution_scope": "All 13 code cells freshly executed in order in one matched CPU kernel: full-data control training, fresh-save reload, selected validation diagnostics and retained checkpoint replay.",
+      "kernel_reference": "aikyatansinha/maestro-full-main-notebook-execution/1",
+      "kernel_id": 139195184,
+      "source_commit": "e1f996cbc32851ad257b92b05dad16fda44a28bf",
+      "source_manifest_sha256": "8b8f4a7faa2babf02c253a9376b89c774147782256076ebc46f8685770eef77c",
+      "execution_receipt_sha256": "bfaab448a37745691f8e733faf54e4c96b4c359ec5a053292ff8b3f19583ebbd",
+      "python": "3.13.15",
+      "runtime": {
+        "torch": "2.11.0+cpu",
+        "numpy": "2.1.3",
+        "pandas": "2.2.3",
+        "matplotlib": "3.10.0",
+        "nbclient": "0.10.2",
+        "nbformat": "5.10.4",
+        "ipykernel": "6.29.5",
+        "jupyter-client": "8.6.3",
+        "scipy": "1.16.3",
+        "soundfile": "0.14.0"
+      },
+      "fresh_checkpoint_reload_probability_max_difference": 0.0,
+      "full_validation_replay_ap": 0.4767020190677916
+    },
+    {
+      "path": "notebooks/03_results_and_inference.ipynb",
+      "sha256_lf": "8ce4ae389029fd1df7b780ea23566752433faf1496aa5a18986a2809bc567b04",
+      "code_cells": 7,
+      "executed_code_cells": 7,
+      "error_outputs": 0,
+      "inline_png_outputs": 3,
+      "required_artifacts": [
+        "data/features/five-second-cache/metadata.json",
+        "docs/postprocess-v5-observed-holdout.json",
+        "docs/postprocess-v5-actual-inference-proof.json"
+      ],
+      "execution_scope": "Preserved executed model/data analysis with actual outputs."
+    },
+    {
+      "path": "notebooks/04_deployment_and_threshold_diagnostics.ipynb",
+      "sha256_lf": "520f3365d91525c94b85e5f4e552f3c9634acb19051cf9917b533f3daff50e71",
+      "code_cells": 7,
+      "executed_code_cells": 7,
+      "error_outputs": 0,
+      "inline_png_outputs": 3,
+      "required_artifacts": [
+        "data/features/five-second-cache/metadata.json",
+        "data/features/five-second-cache/validation.npz",
+        "models/postprocess-v5/selected.pt"
+      ],
+      "execution_scope": "Preserved executed model/data analysis with actual outputs."
+    }
+  ],
+  "model_artifacts": "Private MAESTRO feature caches and retained/recorded checkpoints; see README reproduction commands.",
+  "test_policy": "Observed test tables are read from saved reports; no test predictions are recomputed by these analyses.",
+  "selected_checkpoint_sha256": "d082cb659e8ab94b9661fca741630cf12e09b951aa7ec74a544deceb7792c689",
+  "selected_validation_record": "docs/selected-validation.json"
+}
